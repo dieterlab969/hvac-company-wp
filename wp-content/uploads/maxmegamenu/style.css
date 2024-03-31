@@ -51,7 +51,7 @@
 }
 @media only screen and (min-width: 1024px) {
   #mega-menu-wrap-menu-1 {
-    background: #00669b;
+    background: #00A0E4;
   }
 }
 #mega-menu-wrap-menu-1.mega-keyboard-navigation .mega-menu-toggle:focus, #mega-menu-wrap-menu-1.mega-keyboard-navigation .mega-toggle-block:focus, #mega-menu-wrap-menu-1.mega-keyboard-navigation .mega-toggle-block a:focus, #mega-menu-wrap-menu-1.mega-keyboard-navigation .mega-toggle-block .mega-search input[type=text]:focus, #mega-menu-wrap-menu-1.mega-keyboard-navigation .mega-toggle-block button.mega-toggle-animated:focus, #mega-menu-wrap-menu-1.mega-keyboard-navigation #mega-menu-menu-1 a:focus, #mega-menu-wrap-menu-1.mega-keyboard-navigation #mega-menu-menu-1 input:focus, #mega-menu-wrap-menu-1.mega-keyboard-navigation #mega-menu-menu-1 li.mega-menu-item a.mega-menu-link:focus {
@@ -62,7 +62,7 @@
   outline-offset: 2px;
 }
 #mega-menu-wrap-menu-1.mega-keyboard-navigation > li.mega-menu-item > a.mega-menu-link:focus {
-  background: #00669b;
+  background: #00A0E4;
   color: #f20c10;
   font-weight: normal;
   text-decoration: none;
@@ -71,7 +71,7 @@
 @media only screen and (max-width: 1023px) {
   #mega-menu-wrap-menu-1.mega-keyboard-navigation > li.mega-menu-item > a.mega-menu-link:focus {
     color: #f20c10;
-    background: #00669b;
+    background: #00A0E4;
   }
 }
 #mega-menu-wrap-menu-1 #mega-menu-menu-1 {
@@ -286,7 +286,7 @@
 }
 @media only screen and (min-width: 1024px) {
   #mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-item > a.mega-menu-link:hover {
-    background: #00669b;
+    background: #00A0E4;
     color: #f20c10;
     font-weight: normal;
     text-decoration: none;
@@ -294,7 +294,7 @@
   }
 }
 #mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-item.mega-toggle-on > a.mega-menu-link {
-  background: #00669b;
+  background: #00A0E4;
   color: #f20c10;
   font-weight: normal;
   text-decoration: none;
@@ -303,11 +303,11 @@
 @media only screen and (max-width: 1023px) {
   #mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-item.mega-toggle-on > a.mega-menu-link {
     color: #f20c10;
-    background: #00669b;
+    background: #00A0E4;
   }
 }
 #mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-item.mega-current-menu-item > a.mega-menu-link, #mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-item.mega-current-menu-ancestor > a.mega-menu-link, #mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-item.mega-current-page-ancestor > a.mega-menu-link {
-  background: #00669b;
+  background: #00A0E4;
   color: #f20c10;
   font-weight: normal;
   text-decoration: none;
@@ -316,7 +316,7 @@
 @media only screen and (max-width: 1023px) {
   #mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-item.mega-current-menu-item > a.mega-menu-link, #mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-item.mega-current-menu-ancestor > a.mega-menu-link, #mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-item.mega-current-page-ancestor > a.mega-menu-link {
     color: #f20c10;
-    background: #00669b;
+    background: #00A0E4;
   }
 }
 #mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-item > a.mega-menu-link {
@@ -331,7 +331,7 @@
   text-decoration: none;
   text-align: left;
   text-decoration: none;
-  background: #00669b;
+  background: #00A0E4;
   border: 0;
   border-radius: 0;
   font-family: inherit;
@@ -915,7 +915,7 @@
   width: auto;
   border: 0;
   padding: 0px 0px 0px 0px;
-  background: #00669b;
+  background: #00A0E4;
   max-width: none;
 }
 @media only screen and (max-width: 1023px) {
@@ -954,7 +954,7 @@
 }
 #mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-flyout ul.mega-sub-menu li.mega-menu-item a.mega-menu-link {
   display: block;
-  background: #00669b;
+  background: #00A0E4;
   color: #fff;
   font-family: inherit;
   font-size: 13px;
@@ -1221,7 +1221,7 @@
 }
 @media only screen and (max-width: 1023px) {
   #mega-menu-wrap-menu-1 .mega-menu-toggle + #mega-menu-menu-1 {
-    background: #00669b;
+    background: #00A0E4;
     padding: 0px 0px 0px 0px;
     display: none;
   }
@@ -1278,7 +1278,7 @@ html.mega-menu-menu-1-off-canvas-open #wpadminbar {
   content: '\f333';
   font-family: 'dashicons';
   font-size: 24px;
-  color: #00669b;
+  color: #00A0E4;
   margin: 0 0 0 5px;
 }
 #mega-menu-wrap-menu-1 .mega-menu-toggle .mega-toggle-block-1 .mega-toggle-label {
@@ -1313,7 +1313,7 @@ html.mega-menu-menu-1-off-canvas-open #wpadminbar {
   background: transparent;
 }
 #mega-menu-wrap-menu-1.mega-sticky #mega-menu-menu-1 {
-  background: #00669b;
+  background: #00A0E4;
 }
 #mega-menu-wrap-menu-1.mega-stuck.mega-hide {
   transform: translateY(-100%);
@@ -1705,7 +1705,7 @@ html.mega-menu-menu-1-off-canvas-open #wpadminbar {
   #mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-tabbed > ul.mega-sub-menu > li.mega-menu-item > a.mega-menu-link {
     width: 100%;
     float: left;
-    background: #00669b;
+    background: #00A0E4;
     color: #fff;
     font-family: inherit;
     font-size: 13px;
