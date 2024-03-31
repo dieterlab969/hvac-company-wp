@@ -72,10 +72,29 @@
         font-size: 13px;
         line-height: 24px;
     }
+    .desktop-hidden {
+        display: none;
+    }
+    .header__main .mobile-hidden {
+        margin: 0 auto;
+    }
+
+    @media only screen and (max-width : 320px) {
+
+        .desktop-hidden {
+            display: block;
+        }
+       .mobile-hidden {
+           display: none;
+       }
+    }
 </style>
 <div class="d-none d-lg-block d-xl-block">
     <section class="header__main">
-        <div class="container">
+        <div class="mobile-hidden">
+            <img alt="header banner" class="header-banner" src="https://dienlanhphangia.com/wp-content/uploads/2024/03/header-banner.png"/>
+        </div>
+        <div class="container desktop-hidden">
             <?php
 
           //  home_url()
