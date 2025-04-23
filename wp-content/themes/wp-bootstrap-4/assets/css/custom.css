@@ -498,7 +498,15 @@ div#form-contact input {
     border-radius: 0px;
     height: 45px;
     font-size: 14px;
-} 
+}
+.sale__item.archive_item .product-price {
+    color: red;
+    text-align: center;
+    margin-top: 8px;
+}
+.sale__item.archive_item .currency {
+    text-decoration: underline;
+}
 div#form-contact textarea {
 	background: #ededed;
     border: 0px;
