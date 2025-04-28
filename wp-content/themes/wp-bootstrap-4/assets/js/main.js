@@ -7,9 +7,11 @@ jQuery(window).scroll(function() {
     if (scroll >= 300) {
         jQuery(".header__menu").addClass("fixed");
         jQuery(".header__mobile").addClass("fixed");
+        jQuery(".header__main").addClass("fixed");
     } else {
         jQuery(".header__menu").removeClass("fixed");
         jQuery(".header__mobile").removeClass("fixed");
+        jQuery(".header__main").removeClass("fixed");
     }
 
 });
@@ -190,6 +192,123 @@ var swiper4 = new Swiper('.swiper4', {
     }
   }
 });
+
+// Display news about the project (cong-trinh) in the form of a swiper.
+var swiper5 = new Swiper('.swiper5', {
+  slidesPerView: 4,
+  spaceBetween: 20,
+  autoplay: {
+    delay: 5000,
+  },
+  loop: true,
+  navigation: {
+    nextEl: '.swiper-button-next_5',
+    prevEl: '.swiper-button-prev_5',
+  },
+  breakpoints: {
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 20,
+    },
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    640: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    }
+  }
+});
+
+var swiper6 = new Swiper('.swiper6', {
+  slidesPerView: 4,
+  spaceBetween: 20,
+  autoplay: {
+    delay: 5000,
+  },
+  loop: true,
+  navigation: {
+    nextEl: '.swiper-button-next_6',
+    prevEl: '.swiper-button-prev_6',
+  },
+  breakpoints: {
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 20,
+    },
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    640: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    }
+  }
+});
+
+var swiper7 = new Swiper('.swiper7', {
+  slidesPerView: 3,
+  spaceBetween: 20,
+  autoplay: {
+    delay: 5000
+  },
+  loop: true,
+  navigation: {
+    nextEl: '.swiper-button-next_7',
+    prevEl: '.swiper-button-prev_7'
+  },
+  breakpoints: {
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 20,
+    },
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    640: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    }
+  }
+});
+
+// END.
+
+  new Swiper('.certificates-carousel', {
+    slidesPerView: 3,
+    spaceBetween: 12,
+    navigation: {
+      nextEl: '.swiper-button-next_8',
+      prevEl: '.swiper-button-prev_8'
+    },
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+      },
+      1024: {
+        slidesPerView: 3,
+      }
+    }
+  })
 
   // Gallery sản phẩm 
   jQuery('.gallery-sp').slick({
