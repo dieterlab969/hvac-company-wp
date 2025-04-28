@@ -8,10 +8,12 @@ jQuery(window).scroll(function() {
         jQuery(".header__menu").addClass("fixed");
         jQuery(".header__mobile").addClass("fixed");
         jQuery(".header__main").addClass("fixed");
+        jQuery(".header__main").css("marginTop", "40px");
     } else {
         jQuery(".header__menu").removeClass("fixed");
         jQuery(".header__mobile").removeClass("fixed");
         jQuery(".header__main").removeClass("fixed");
+        jQuery(".header__main").css("marginTop", "unset");
     }
 
 });
