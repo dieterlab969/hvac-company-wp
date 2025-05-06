@@ -32,12 +32,99 @@ $b_link_4 = $banner_4['link'] ?: '#';
 $b_link_5 = $banner_5['link'] ?: '#';
 $b_link_6 = $banner_6['link'] ?: '#';
 ?>
+<style>
+    .advertisement-block {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
+    .left-column {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        font-size: 1.4rem;
+        font-family: "segoeui";
+        font-weight: 200;
+    }
+    .left-column .ad-title {
+        font-size: 2.2rem;
+        font-family: "segoeui_black";
+        position: relative;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .left-column .ad-title::after {
+        content: "";
+        position: absolute;
+        width: 75px;
+        height: 3px;
+        background-color: #00A0E4;
+        left: 50%;
+        -webkit-transform: translatex(-50%);
+        -ms-transform: translatex(-50%);
+        transform: translatex(-50%);
+        bottom: -2px;
+    }
+
+    .right-column {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    .swiper7 {
+        height: 356px;
+    }
+    .swiper7 .swiper-slide {
+        height: 100%;
+    }
+    .swiper7 .sub-block {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .swiper7 .sub-title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    /* Desktop styles */
+    @media screen and (min-width: 768px) {
+        .advertisement-block {
+            flex-wrap: nowrap;
+        }
+
+        .left-column {
+            width: 23%; /* Nhỏ hơn 1/4 */
+        }
+
+        .right-column {
+            width: 77%; /* Phần còn lại */
+        }
+    }
+</style>
 <div class="container">
     <div class="advertisement-block">
         <div class="left-column">
-            <h2 class="ad-title text-uppercase"><?= $condition_title ?></h2>
-            <p class="ad-description"><?= $condition_desc ?></p>
+            <h2 class="ad-title text-uppercase">Giải pháp điều hòa</h2>
+            <p class="ad-description"></p><p><strong>PHAN GIA là đơn vị chuyên Thiết kế &amp; Thi công Hệ thống Điều hòa không khí trung tâm VRV ,Chiler , AHU , Điều hòa thương mại và hệ thống thông gió thu hồi nhiệt.</strong></p>
+            <p><strong>Giải pháp cho cửa hàng tiện lợi</strong><br>
+                <strong>Giải pháp cho biệt thự nghỉ dưỡng</strong></p>
+            <p><strong>Giải pháp cho tòa nhà văn phòng</strong><br>
+                <strong>Giải pháp cho nhà hàng showrom</strong></p>
+            <p>&nbsp;</p>
+            <p></p>
         </div>
         <div class="right-column">
             <div class="container">
