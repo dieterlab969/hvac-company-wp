@@ -588,6 +588,39 @@ a.title_related {
     font-size: 16px;
 }
 
+.intro-content .intro-title {
+    font-size: 2.2rem;
+    font-family: "segoeui_black";
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+}
+
+.intro-content .intro-text {
+    text-align: justify;
+}
+
+.intro-content a.btn-more {
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.swiper.swiper7 {
+    overflow: hidden;
+}
+
+.intro-content {
+    margin-left: unset;
+}
+
+@media (min-width: 576px) {
+    .intro-content {
+        margin-left: 60px;
+    }
+}
+
+
 /* Desktops and laptops ----------- */
 @media only screen 
 and (min-width : 1024px) {

@@ -97,12 +97,11 @@ $b_link_6 = $banner_6['link'] ?: '#';
     .swiper7 .sub-title {
         position: absolute;
         bottom: 0;
-        left: 0;
-        right: 0;
         color: white;
         padding: 10px;
         font-size: 16px;
         font-weight: bold;
+        background-color: #00A0E4;
     }
 
     /* Desktop styles */
