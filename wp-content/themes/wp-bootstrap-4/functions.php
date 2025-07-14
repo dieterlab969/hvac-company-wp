@@ -501,3 +501,16 @@ add_filter( 'admin_body_class', 'wpa66834_role_admin_body_class' );
 
 
 add_filter( 'use_block_editor_for_post', '__return_false' );
+
+/**
+ * chèn mã chatbox Botbanhang vào WordPress
+ * @return void
+ */
+function add_botbanhang_chatbox() {
+    ?><script src="https://chatbox-embed-sdk.botbanhang.vn/dist/sdk.min.js"></script>
+<script>
+    BBH.init({ page_id: '490792590181087' })
+</script>
+    <?php
+}
+add_action('wp_footer', 'add_botbanhang_chatbox');
