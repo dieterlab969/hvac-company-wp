@@ -614,6 +614,42 @@ a.title_related {
     margin-left: unset;
 }
 
+
+.page.page-id-8893    .woocommerce-loop-product__title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+    }
+.page.page-id-8893    .daikin-tabs { margin-top: 20px; }
+.page.page-id-8893    .tab-buttons { list-style: none; display: flex; padding: 0; margin: 0 0 20px 0; border-bottom: 2px solid #0073aa; }
+.page.page-id-8893    .tab-buttons li { padding: 10px 20px; cursor: pointer; background: #f0f0f0; border-top-left-radius: 5px; border-top-right-radius: 5px; margin-right: 5px; font-weight: bold; color: #0073aa; }
+.page.page-id-8893    .tab-buttons li.active { background: #0073aa; color: #fff; }
+.page.page-id-8893   .tab-content { display: none; }
+.page.page-id-8893    .tab-content.active { display: block; }
+
+.page.page-id-8893    .catalog-item { width: 220px; text-align: center; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; transition: all 0.3s ease; }
+.page.page-id-8893    .catalog-item img { width: 100%; height: auto; display: block; }
+.page.page-id-8893    .catalog-item p { margin: 10px; font-weight: 500; color: #0a57a1; font-size: 14px; }
+.page.page-id-8893    .catalog-item:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.1); transform: translateY(-3px); }
+.page.page-id-8893   .daikin-catalog-grid {
+        display: flex !important;
+        flex-wrap: nowrap !important;       /* nằm trên 1 hàng */
+        gap: 20px !important;
+        overflow-x: auto !important;        /* bật scroll ngang */
+        -webkit-overflow-scrolling: touch;   /* mượt trên iOS */
+        padding-bottom: 10px;                /* nếu cần cách dưới */
+    }
+
+.page.page-id-8893    .daikin-catalog-grid .catalog-item {
+    flex: 0 0 220px !important;   /* cố định mỗi item rộng 220px */
+}
+/* Ẩn toàn bộ danh mục bên phải (cả "Danh mục sản phẩm" và "Mẹo hay") chỉ trên trang Tài liệu Daikin */
+body.page-id-8893 .widget-area .danhmuc {
+    display: none !important;
+}
+
+
 @media (min-width: 576px) {
     .intro-content {
         margin-left: 60px;
