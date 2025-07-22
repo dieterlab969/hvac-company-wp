@@ -644,10 +644,6 @@ a.title_related {
 .page.page-id-8893    .daikin-catalog-grid .catalog-item {
     flex: 0 0 220px !important;   /* cố định mỗi item rộng 220px */
 }
-/* Ẩn toàn bộ danh mục bên phải (cả "Danh mục sản phẩm" và "Mẹo hay") chỉ trên trang Tài liệu Daikin */
-body.page-id-8893 .widget-area .danhmuc {
-    display: none !important;
-}
 
 
 @media (min-width: 576px) {
