@@ -54,9 +54,11 @@
         <a class="btn-call" href="tel:<?php echo preg_replace('/\s+/', '', $hotline); ?>"><i class="btn-call__ico fa fa-phone" aria-hidden="true"></i>
         </a>
         <div class="btn-call__number">
-            <a href="tel:<?php echo preg_replace('/\s+/', '', $hotline); ?>"><?php echo preg_replace('/\s+/', '', $hotline); ?></a>
+            <a href="tel:<?php echo preg_replace('/\s+/', '', $hotline); ?>"><?php echo $hotline; ?></a>
         </div>
     </div>
+
+    <!-- Giữ nguyên phần Zalo nhưng điều chỉnh vị trí để khớp với iframe chatbot -->
     <div class="zalo-box">
         <a class="btn-zalo" rel="nofollow" target="_blank" href="https://zalo.me/<?php echo preg_replace('/\s+/', '', $hotline); ?>">
             <span class="btn-zalo__ico"></span>
@@ -66,6 +68,7 @@
         </div>
     </div>
 </div>
+
 <style type="text/css">
     :root {
         --btn-bg-color:#38a3fd;
@@ -100,7 +103,6 @@
         bottom: var(--phone-mb-vertical)!important;
     }
 
-    /* Sửa lại hướng hiển thị của số điện thoại khi nút đã chuyển sang trái */
     .scb-phone-box.social-bottomRight .btn-call__number {
         left: 30px;
         right: auto;
@@ -111,7 +113,6 @@
         text-align: left;
     }
 
-    /* Các styles còn lại cho nút gọi điện */
     .scb-phone-box .btn-call {
         position: relative;
         background: var(--btn-bg-color);
@@ -130,7 +131,7 @@
         justify-content: center;
         align-items: center;
         text-decoration: none;
-        overflow: hidden; /* Quan trọng để giữ hiệu ứng ripple trong nút */
+        overflow: hidden;
     }
 
     .scb-phone-box .btn-call__ico {
@@ -184,13 +185,13 @@
         color: var(--btn-bg-color);
     }
 
-    /* CSS cho nút Zalo */
+    /* CSS cho nút Zalo - di chuyển đến vị trí chính xác của iframe chatbot */
     .zalo-box {
         position: fixed;
         display: var(--phone-pc-display);
-        z-index: 9;
-        right: var(--phone-pc-horizontal);
-        bottom: var(--phone-pc-vertical);
+        z-index: 9; /* Đặt z-index thấp hơn chatbot */
+        right: 12px; /* Chính xác vị trí của iframe */
+        bottom: 10px; /* Chính xác vị trí của iframe */
     }
 
     .zalo-box .btn-zalo {
@@ -203,7 +204,7 @@
         height: 60px;
         width: 60px;
         text-align: center;
-        z-index: 999;
+        z-index: 9;
         transition: .3s;
         -webkit-animation: hoverWaveZalo linear 1s infinite;
         animation: hoverWaveZalo linear 1s infinite;
@@ -211,7 +212,7 @@
         justify-content: center;
         align-items: center;
         text-decoration: none;
-        overflow: hidden; /* Quan trọng để giữ hiệu ứng ripple trong nút */
+        overflow: hidden;
     }
 
     .zalo-box .btn-zalo__ico {
@@ -226,6 +227,11 @@
         background-position: center;
         transition: .3s all;
         z-index: 3;
+        /* Áp dụng hiệu ứng rung như chatbot yêu cầu */
+        animation: 1200ms ease 0s normal none 1 running shake;
+        animation-iteration-count: infinite;
+        -webkit-animation: 1200ms ease 0s normal none 1 running shake;
+        -webkit-animation-iteration-count: infinite;
     }
 
     .zalo-box .btn-zalo__text {
@@ -247,27 +253,21 @@
         padding-right: 50px;
         border-radius: 20px 0 0 20px;
         text-align: right;
-    }
-
-    .zalo-box .btn-zalo__text a {
-        color: var(--zalo-bg-color);
+        opacity: 0; /* Ẩn phần text */
+        pointer-events: none; /* Không cho tương tác với text */
     }
 
     .zalo-box .btn-zalo:hover {
         background-color: var(--btn-txt-color);
     }
 
-    /* Thêm xử lý cho hover của biểu tượng Zalo */
     .zalo-box .btn-zalo:hover .btn-zalo__ico {
         filter: invert(26%) sepia(97%) saturate(1645%) hue-rotate(199deg) brightness(96%) contrast(106%);
     }
 
-    .zalo-box:hover .btn-zalo__text {
-        background-color: var(--btn-txt-color);
-    }
-
-    .zalo-box:hover .btn-zalo__text a {
-        color: var(--zalo-bg-color);
+    /* Style cho iframe chatbot - đúng ID */
+    iframe#BBH-EMBED-IFRAME {
+        z-index: 999999 !important; /* Giữ nguyên z-index cao của iframe */
     }
 
     /* Animations */
@@ -480,11 +480,6 @@
             right: auto;
             bottom: var(--phone-pc-vertical);
         }
-
-        .zalo-box {
-            right: var(--phone-pc-horizontal);
-            bottom: calc(var(--phone-pc-vertical) + 80px);
-        }
     }
 
     @media(max-width: 600px) {
@@ -496,18 +491,44 @@
             right: auto!important;
             bottom: var(--phone-mb-vertical)!important;
         }
-
-        .zalo-box {
-            display: var(--phone-mb-display)!important;
-            right: var(--phone-mb-horizontal)!important;
-            bottom: calc(var(--phone-mb-vertical) + 100px)!important; /* Điều chỉnh vị trí lên cao hơn trên mobile */
-        }
     }
 </style>
 
-<!-- JavaScript cho hiệu ứng ripple -->
+<!-- JavaScript để đảm bảo iframe chatbot hiển thị trước nút Zalo -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Không cần tăng z-index vì iframe đã có z-index cao (999999)
+        // Nhưng chúng ta vẫn kiểm tra để đảm bảo
+        const findChatbotInterval = setInterval(function() {
+            const chatIframe = document.getElementById('BBH-EMBED-IFRAME');
+            if (chatIframe && chatIframe.style.zIndex < 999999) {
+                chatIframe.style.zIndex = "999999";
+                clearInterval(findChatbotInterval);
+            } else if (chatIframe) {
+                clearInterval(findChatbotInterval);
+            }
+        }, 500);
+
+        // Điều chỉnh kích thước của nút Zalo để khớp với iframe nếu cần
+        const findAndAdjustZalo = setInterval(function() {
+            const chatIframe = document.getElementById('BBH-EMBED-IFRAME');
+            const zaloBtn = document.querySelector('.btn-zalo');
+
+            if (chatIframe && zaloBtn) {
+                // Lấy kích thước của iframe
+                const iframeWidth = chatIframe.offsetWidth;
+                const iframeHeight = chatIframe.offsetHeight;
+
+                // Điều chỉnh kích thước nút Zalo nếu cần
+                if (iframeWidth > 0 && iframeHeight > 0) {
+                    zaloBtn.style.width = iframeWidth + 'px';
+                    zaloBtn.style.height = iframeHeight + 'px';
+                    clearInterval(findAndAdjustZalo);
+                }
+            }
+        }, 500);
+
+        // Hiệu ứng ripple
         function createRipple(event) {
             const button = event.currentTarget;
 
@@ -537,7 +558,7 @@
             });
         }
 
-        // Áp dụng cho cả nút gọi điện và nút Zalo
+        // Áp dụng hiệu ứng ripple
         const buttons = document.querySelectorAll('.btn-call, .btn-zalo');
         buttons.forEach(button => {
             button.addEventListener('click', createRipple);
