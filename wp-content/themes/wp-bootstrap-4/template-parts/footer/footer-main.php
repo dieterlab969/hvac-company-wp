@@ -50,45 +50,497 @@
 <!-- call 5 -->
 <?php $hotline=get_field('hotline','option');?>
 <div class="btnClick">
-    <a class="call" href="tel:<?php echo preg_replace('/\s+/', '', $hotline); ?>"><i class="fa fa-phone" aria-hidden="true"></i> Gọi điện</a>
-    <!-- <a class="request guiYeuCauBottom" href="javascript:void(0);"><i class="fa fa-envelope" aria-hidden="true"></i> Gửi yêu cầu</a> -->
-    <a class="zalo" rel="nofollow" target="_blank" href="https://zalo.me/<?php echo preg_replace('/\s+/', '', $hotline); ?>">Chat Zalo</a>
-    <!-- <a class="tel" href="tel:0988.56.59.56"><i class="fa fa-phone" aria-hidden="true"></i> Gọi điện</a> -->
-    <!-- <a class="fb" rel="nofollow" target="_blank" href="https://m.me/thang.tatthanh"><i class="fa fa-facebook" aria-hidden="true"></i> Chat Facebook</a> -->
+    <div class="scb-phone-box social-bottomRight social-mb-bottomRight">
+        <a class="btn-call" href="tel:<?php echo preg_replace('/\s+/', '', $hotline); ?>"><i class="btn-call__ico fa fa-phone" aria-hidden="true"></i>
+        </a>
+        <div class="btn-call__number">
+            <a href="tel:<?php echo preg_replace('/\s+/', '', $hotline); ?>"><?php echo preg_replace('/\s+/', '', $hotline); ?></a>
+        </div>
+    </div>
+    <div class="zalo-box">
+        <a class="btn-zalo" rel="nofollow" target="_blank" href="https://zalo.me/<?php echo preg_replace('/\s+/', '', $hotline); ?>">
+            <span class="btn-zalo__ico"></span>
+        </a>
+        <div class="btn-zalo__text">
+            <a rel="nofollow" target="_blank" href="https://zalo.me/<?php echo preg_replace('/\s+/', '', $hotline); ?>">Chat Zalo</a>
+        </div>
+    </div>
 </div>
-
 <style type="text/css">
-.btnClick {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    z-index: 999;
-}
-.btnClick a {
-    font: 16px/30px segoeui;
-    color: #fff;
-    display: block;
-    margin-bottom: 10px;
-    height: 30px;
-    color: #fff;
-    background: #00A0E4;
-    border-radius: 20px;
-    padding: 0 10px 0 2px;
-}
-.btnClick i {
-    border-radius: 50%;
-    background: #fff;
-    color: #00A0E4;
-    width: 26px;
-    height: 26px;
-    text-align: center;
-    line-height: 26px;
-    margin-top: 2px;
-}
-.btnClick a.zalo {
-    background: #00A0E4 url(<?php bloginfo( 'url' ); ?>/wp-content/themes/wp-bootstrap-4/assets/images/zaloIcon1.png) no-repeat left 2px center;
-    background-size: 25px auto;
-    padding-left: 32px;
-    transform: translateY(-1px);
-}
+    :root {
+        --btn-bg-color:#38a3fd;
+        --btn-border-color:rgba(56, 163, 253, 0.2);
+        --btn-txt-color:white;
+        --zalo-bg-color:#0068ff;
+        --zalo-border-color:rgba(0, 104, 255, 0.2);
+        --phone-pc-vertical:52px;
+        --phone-pc-horizontal:10px;
+        --phone-mb-vertical:100px;
+        --phone-mb-horizontal:10px;
+        --phone-pc-display:block;
+        --phone-mb-display:block;
+    }
+
+    /* Di chuyển nút gọi điện từ phải sang trái */
+    .scb-phone-box {
+        position: fixed;
+        display: var(--phone-pc-display);
+        z-index: 9;
+    }
+
+    .scb-phone-box.social-bottomRight {
+        left: var(--phone-pc-horizontal);
+        right: auto;
+        bottom: var(--phone-pc-vertical);
+    }
+
+    .scb-phone-box.social-mb-bottomRight {
+        left: var(--phone-mb-horizontal)!important;
+        right: auto!important;
+        bottom: var(--phone-mb-vertical)!important;
+    }
+
+    /* Sửa lại hướng hiển thị của số điện thoại khi nút đã chuyển sang trái */
+    .scb-phone-box.social-bottomRight .btn-call__number {
+        left: 30px;
+        right: auto;
+        top: 5px;
+        padding-left: 50px;
+        padding-right: 0;
+        border-radius: 0 20px 20px 0;
+        text-align: left;
+    }
+
+    /* Các styles còn lại cho nút gọi điện */
+    .scb-phone-box .btn-call {
+        position: relative;
+        background: var(--btn-bg-color);
+        border: 2px solid var(--btn-bg-color);
+        border-radius: 50%;
+        box-shadow: 0 8px 10px rgba(56, 163, 253, 0.3);
+        cursor: pointer;
+        height: 60px;
+        width: 60px;
+        text-align: center;
+        z-index: 999;
+        transition: .3s;
+        -webkit-animation: hoverWave linear 1s infinite;
+        animation: hoverWave linear 1s infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        overflow: hidden; /* Quan trọng để giữ hiệu ứng ripple trong nút */
+    }
+
+    .scb-phone-box .btn-call__ico {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: 1200ms ease 0s normal none 1 running shake;
+        animation-iteration-count: infinite;
+        -webkit-animation: 1200ms ease 0s normal none 1 running shake;
+        -webkit-animation-iteration-count: infinite;
+        color: var(--btn-txt-color);
+        font-size: 30px;
+        padding-top: 5px;
+        transition: .3s all;
+        z-index: 3;
+    }
+
+    .scb-phone-box .btn-call__number {
+        position: absolute;
+        height: 50px;
+        line-height: 50px;
+        background: var(--btn-txt-color);
+        border: 2px solid var(--btn-bg-color);
+        box-shadow: 0 8px 10px rgba(56, 163, 253, 0.3);
+        color: var(--btn-txt-color);
+        font-size: 20px;
+        font-weight: bold;
+        z-index: 1;
+        transition: all 0.5s;
+        width: 200px;
+        overflow: hidden;
+    }
+
+    .scb-phone-box .btn-call__number a {
+        color: var(--btn-bg-color);
+    }
+
+    .scb-phone-box .btn-call:hover {
+        background-color: var(--btn-txt-color);
+    }
+
+    .scb-phone-box .btn-call:hover .btn-call__ico {
+        color: var(--btn-bg-color);
+    }
+
+    .scb-phone-box:hover .btn-call__number {
+        background-color: var(--btn-txt-color);
+    }
+
+    .scb-phone-box:hover .btn-call__number a {
+        color: var(--btn-bg-color);
+    }
+
+    /* CSS cho nút Zalo */
+    .zalo-box {
+        position: fixed;
+        display: var(--phone-pc-display);
+        z-index: 9;
+        right: var(--phone-pc-horizontal);
+        bottom: var(--phone-pc-vertical);
+    }
+
+    .zalo-box .btn-zalo {
+        position: relative;
+        background: var(--zalo-bg-color);
+        border: 2px solid var(--zalo-bg-color);
+        border-radius: 50%;
+        box-shadow: 0 8px 10px rgba(0, 104, 255, 0.3);
+        cursor: pointer;
+        height: 60px;
+        width: 60px;
+        text-align: center;
+        z-index: 999;
+        transition: .3s;
+        -webkit-animation: hoverWaveZalo linear 1s infinite;
+        animation: hoverWaveZalo linear 1s infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        overflow: hidden; /* Quan trọng để giữ hiệu ứng ripple trong nút */
+    }
+
+    .zalo-box .btn-zalo__ico {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 35px;
+        height: 35px;
+        background-image: url('https://page.widget.zalo.me/static/images/2.0/Logo.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: .3s all;
+        z-index: 3;
+    }
+
+    .zalo-box .btn-zalo__text {
+        position: absolute;
+        height: 50px;
+        line-height: 50px;
+        background: var(--btn-txt-color);
+        border: 2px solid var(--zalo-bg-color);
+        box-shadow: 0 8px 10px rgba(0, 104, 255, 0.3);
+        color: var(--btn-txt-color);
+        font-size: 20px;
+        font-weight: bold;
+        z-index: 1;
+        transition: all 0.5s;
+        width: 200px;
+        overflow: hidden;
+        right: 30px;
+        top: 5px;
+        padding-right: 50px;
+        border-radius: 20px 0 0 20px;
+        text-align: right;
+    }
+
+    .zalo-box .btn-zalo__text a {
+        color: var(--zalo-bg-color);
+    }
+
+    .zalo-box .btn-zalo:hover {
+        background-color: var(--btn-txt-color);
+    }
+
+    /* Thêm xử lý cho hover của biểu tượng Zalo */
+    .zalo-box .btn-zalo:hover .btn-zalo__ico {
+        filter: invert(26%) sepia(97%) saturate(1645%) hue-rotate(199deg) brightness(96%) contrast(106%);
+    }
+
+    .zalo-box:hover .btn-zalo__text {
+        background-color: var(--btn-txt-color);
+    }
+
+    .zalo-box:hover .btn-zalo__text a {
+        color: var(--zalo-bg-color);
+    }
+
+    /* Animations */
+    @-webkit-keyframes hoverWave {
+        0% {
+            box-shadow: 0 8px 10px var(--btn-border-color), 0 0 0 0 var(--btn-border-color), 0 0 0 0 var(--btn-border-color)
+        }
+        40% {
+            box-shadow: 0 8px 10px var(--btn-border-color), 0 0 0 15px var(--btn-border-color), 0 0 0 0 var(--btn-border-color)
+        }
+        80% {
+            box-shadow: 0 8px 10px var(--btn-border-color), 0 0 0 30px var(--btn-border-color), 0 0 0 26.7px var(--btn-border-color)
+        }
+        100% {
+            box-shadow: 0 8px 10px var(--btn-border-color), 0 0 0 30px var(--btn-border-color), 0 0 0 40px var(--btn-border-color)
+        }
+    }
+
+    @keyframes hoverWave {
+        0% {
+            box-shadow: 0 8px 10px rgba(56, 163, 253, 0.2),
+            0 0 0 0 rgba(56, 163, 253, 0.2),
+            0 0 0 0 rgba(56, 163, 253, 0.2)
+        }
+        40% {
+            box-shadow: 0 8px 10px rgba(56, 163, 253, 0.2),
+            0 0 0 15px rgba(56, 163, 253, 0.2),
+            0 0 0 0 rgba(56, 163, 253, 0.2)
+        }
+        80% {
+            box-shadow: 0 8px 10px rgba(56, 163, 253, 0.2),
+            0 0 0 30px rgba(56, 163, 253, 0.2),
+            0 0 0 26.7px rgba(56, 163, 253, 0.2)
+        }
+        100% {
+            box-shadow: 0 8px 10px rgba(56, 163, 253, 0.2),
+            0 0 0 30px rgba(56, 163, 253, 0.2),
+            0 0 0 40px rgba(56, 163, 253, 0.2)
+        }
+    }
+
+    @-webkit-keyframes hoverWaveZalo {
+        0% {
+            box-shadow: 0 8px 10px rgba(0, 104, 255, 0.2), 0 0 0 0 rgba(0, 104, 255, 0.2), 0 0 0 0 rgba(0, 104, 255, 0.2)
+        }
+        40% {
+            box-shadow: 0 8px 10px rgba(0, 104, 255, 0.2), 0 0 0 15px rgba(0, 104, 255, 0.2), 0 0 0 0 rgba(0, 104, 255, 0.2)
+        }
+        80% {
+            box-shadow: 0 8px 10px rgba(0, 104, 255, 0.2), 0 0 0 30px rgba(0, 104, 255, 0.2), 0 0 0 26.7px rgba(0, 104, 255, 0.2)
+        }
+        100% {
+            box-shadow: 0 8px 10px rgba(0, 104, 255, 0.2), 0 0 0 30px rgba(0, 104, 255, 0.2), 0 0 0 40px rgba(0, 104, 255, 0.2)
+        }
+    }
+
+    @keyframes hoverWaveZalo {
+        0% {
+            box-shadow: 0 8px 10px rgba(0, 104, 255, 0.2), 0 0 0 0 rgba(0, 104, 255, 0.2), 0 0 0 0 rgba(0, 104, 255, 0.2)
+        }
+        40% {
+            box-shadow: 0 8px 10px rgba(0, 104, 255, 0.2), 0 0 0 15px rgba(0, 104, 255, 0.2), 0 0 0 0 rgba(0, 104, 255, 0.2)
+        }
+        80% {
+            box-shadow: 0 8px 10px rgba(0, 104, 255, 0.2), 0 0 0 30px rgba(0, 104, 255, 0.2), 0 0 0 26.7px rgba(0, 104, 255, 0.2)
+        }
+        100% {
+            box-shadow: 0 8px 10px rgba(0, 104, 255, 0.2), 0 0 0 30px rgba(0, 104, 255, 0.2), 0 0 0 40px rgba(0, 104, 255, 0.2)
+        }
+    }
+
+    @keyframes shake {
+        0% {
+            transform: rotateZ(0deg);
+            -webkit-transform: rotateZ(0deg);
+            -ms-transform: rotateZ(0deg);
+        }
+        10% {
+            transform: rotateZ(-30deg);
+            -webkit-transform: rotateZ(-30deg);
+            -ms-transform: rotateZ(-30deg);
+        }
+        20% {
+            transform: rotateZ(15deg);
+            -webkit-transform: rotateZ(15deg);
+            -ms-transform: rotateZ(15deg);
+        }
+        30% {
+            transform: rotateZ(-10deg);
+            -webkit-transform: rotateZ(-10deg);
+            -ms-transform: rotateZ(-10deg);
+        }
+        40% {
+            transform: rotateZ(7.5deg);
+            -webkit-transform: rotateZ(7.5deg);
+            -ms-transform: rotateZ(7.5deg);
+        }
+        50% {
+            transform: rotateZ(-6deg);
+            -webkit-transform: rotateZ(-6deg);
+            -ms-transform: rotateZ(-6deg);
+        }
+        60% {
+            transform: rotateZ(5deg);
+            -webkit-transform: rotateZ(5deg);
+            -ms-transform: rotateZ(5deg);
+        }
+        70% {
+            transform: rotateZ(-4.28571deg);
+            -webkit-transform: rotateZ(-4.28571deg);
+            -ms-transform: rotateZ(-4.28571deg);
+        }
+        80% {
+            transform: rotateZ(3.75deg);
+            -webkit-transform: rotateZ(3.75deg);
+            -ms-transform: rotateZ(3.75deg);
+        }
+        90% {
+            transform: rotateZ(-3.33333deg);
+            -webkit-transform: rotateZ(-3.33333deg);
+            -ms-transform: rotateZ(-3.33333deg);
+        }
+        100% {
+            transform: rotateZ(0deg);
+            -webkit-transform: rotateZ(0deg);
+            -ms-transform: rotateZ(0deg);
+        }
+    }
+
+    @-webkit-keyframes shake {
+        /* Giữ nguyên keyframes */
+        0% {
+            transform: rotateZ(0deg);
+            -webkit-transform: rotateZ(0deg);
+            -ms-transform: rotateZ(0deg);
+        }
+        10% {
+            transform: rotateZ(-30deg);
+            -webkit-transform: rotateZ(-30deg);
+            -ms-transform: rotateZ(-30deg);
+        }
+        20% {
+            transform: rotateZ(15deg);
+            -webkit-transform: rotateZ(15deg);
+            -ms-transform: rotateZ(15deg);
+        }
+        30% {
+            transform: rotateZ(-10deg);
+            -webkit-transform: rotateZ(-10deg);
+            -ms-transform: rotateZ(-10deg);
+        }
+        40% {
+            transform: rotateZ(7.5deg);
+            -webkit-transform: rotateZ(7.5deg);
+            -ms-transform: rotateZ(7.5deg);
+        }
+        50% {
+            transform: rotateZ(-6deg);
+            -webkit-transform: rotateZ(-6deg);
+            -ms-transform: rotateZ(-6deg);
+        }
+        60% {
+            transform: rotateZ(5deg);
+            -webkit-transform: rotateZ(5deg);
+            -ms-transform: rotateZ(5deg);
+        }
+        70% {
+            transform: rotateZ(-4.28571deg);
+            -webkit-transform: rotateZ(-4.28571deg);
+            -ms-transform: rotateZ(-4.28571deg);
+        }
+        80% {
+            transform: rotateZ(3.75deg);
+            -webkit-transform: rotateZ(3.75deg);
+            -ms-transform: rotateZ(3.75deg);
+        }
+        90% {
+            transform: rotateZ(-3.33333deg);
+            -webkit-transform: rotateZ(-3.33333deg);
+            -ms-transform: rotateZ(-3.33333deg);
+        }
+        100% {
+            transform: rotateZ(0deg);
+            -webkit-transform: rotateZ(0deg);
+            -ms-transform: rotateZ(0deg);
+        }
+    }
+
+    /* CSS cho hiệu ứng ripple */
+    .ripple {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple-animation 0.6s linear;
+        pointer-events: none;
+    }
+
+    @keyframes ripple-animation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+
+    /* Responsive */
+    @media(min-width: 601px) {
+        .scb-phone-box.social-bottomRight {
+            left: var(--phone-pc-horizontal);
+            right: auto;
+            bottom: var(--phone-pc-vertical);
+        }
+
+        .zalo-box {
+            right: var(--phone-pc-horizontal);
+            bottom: calc(var(--phone-pc-vertical) + 80px);
+        }
+    }
+
+    @media(max-width: 600px) {
+        .scb-phone-box {
+            display: var(--phone-mb-display)!important;
+        }
+        .scb-phone-box.social-mb-bottomRight {
+            left: var(--phone-mb-horizontal)!important;
+            right: auto!important;
+            bottom: var(--phone-mb-vertical)!important;
+        }
+
+        .zalo-box {
+            display: var(--phone-mb-display)!important;
+            right: var(--phone-mb-horizontal)!important;
+            bottom: calc(var(--phone-mb-vertical) + 100px)!important; /* Điều chỉnh vị trí lên cao hơn trên mobile */
+        }
+    }
 </style>
+
+<!-- JavaScript cho hiệu ứng ripple -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function createRipple(event) {
+            const button = event.currentTarget;
+
+            // Xóa các hiệu ứng cũ
+            const ripples = button.getElementsByClassName("ripple");
+            for (let i = 0; i < ripples.length; i++) {
+                ripples[i].remove();
+            }
+
+            // Tạo phần tử ripple mới
+            const circle = document.createElement("span");
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            // Tính toán vị trí click tương đối với nút
+            const rect = button.getBoundingClientRect();
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - rect.left - radius}px`;
+            circle.style.top = `${event.clientY - rect.top - radius}px`;
+
+            circle.classList.add("ripple");
+            button.appendChild(circle);
+
+            // Tự động xóa phần tử ripple sau khi animation kết thúc
+            circle.addEventListener('animationend', () => {
+                circle.remove();
+            });
+        }
+
+        // Áp dụng cho cả nút gọi điện và nút Zalo
+        const buttons = document.querySelectorAll('.btn-call, .btn-zalo');
+        buttons.forEach(button => {
+            button.addEventListener('click', createRipple);
+        });
+    });
+</script>
