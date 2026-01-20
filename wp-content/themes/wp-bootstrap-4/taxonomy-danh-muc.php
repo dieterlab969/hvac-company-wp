@@ -33,11 +33,7 @@ get_header(); ?>
                             <!-- end img -->
                             <div class="article__content">
                                 <h5><a href="<?php the_permalink(); ?>" title=""><?php the_title(); ?></a></h5>
-                                <?php
-                                $price = get_field('price');
-                                if ($price): ?>
-                                    <p class="product-price"><?= $price ?><span class="currency">đ</span></p>
-                                <?php endif; ?>
+                                <p class="product-price">Liên Hệ</p>
                             </div>
                         </article>
                     </div>
