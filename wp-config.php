@@ -49,13 +49,13 @@ function env($key, $default = '') {
 
 // ** Thiết lập MySQL - Bạn có thể lấy các thông tin này từ host/server ** //
 /** Tên database MySQL */
-define('DB_NAME', env('DB_NAME', 'webdlphangia2024'));
+define('DB_NAME', env('DB_NAME'));
 
 /** Username của database */
-define('DB_USER', env('DB_USER', 'pinnacle'));
+define('DB_USER', env('DB_USER'));
 
 /** Mật khẩu của database */
-define('DB_PASSWORD', env('DB_PASSWORD', 'pinnacle'));
+define('DB_PASSWORD', env('DB_PASSWORD'));
 
 /** Hostname của database */
 define('DB_HOST', env('DB_HOST', 'localhost'));
