@@ -185,13 +185,32 @@
         color: var(--btn-bg-color);
     }
 
-    /* CSS cho nút Zalo - di chuyển đến vị trí chính xác của iframe chatbot */
+    /* CSS cho nút Zalo - giữ vị trí thấp, ngay phía trên nút Back to Top */
     .zalo-box {
         position: fixed;
         display: var(--phone-pc-display);
-        z-index: 9; /* Đặt z-index thấp hơn chatbot */
-        right: 12px; /* Chính xác vị trí của iframe */
-        bottom: 10px; /* Chính xác vị trí của iframe */
+        z-index: 999; /* z-index cao để hiển thị và click được */
+        right: 20px; /* Cách cạnh phải 20px */
+        bottom: 60px; /* Phía trên nút Back to Top (40px) + khoảng cách 20px */
+    }
+
+    @media(max-width: 600px) {
+        .zalo-box {
+            bottom: 60px; /* Điều chỉnh cho mobile */
+            right: 15px;
+        }
+    }
+
+    /* Di chuyển AI Chatbot iframe lên phía trên nút Zalo */
+    iframe#BBH-EMBED-IFRAME {
+        bottom: 130px !important; /* Phía trên Zalo: 60px (Zalo bottom) + 60px (Zalo height) + 10px khoảng cách */
+        z-index: 999999 !important; /* Giữ nguyên z-index cao của iframe */
+    }
+
+    @media(max-width: 600px) {
+        iframe#BBH-EMBED-IFRAME {
+            bottom: 130px !important; /* Điều chỉnh cho mobile */
+        }
     }
 
     .zalo-box .btn-zalo {
@@ -494,41 +513,10 @@
     }
 </style>
 
-<!-- JavaScript để đảm bảo iframe chatbot hiển thị trước nút Zalo -->
+<!-- JavaScript cho hiệu ứng ripple -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Không cần tăng z-index vì iframe đã có z-index cao (999999)
-        // Nhưng chúng ta vẫn kiểm tra để đảm bảo
-        const findChatbotInterval = setInterval(function() {
-            const chatIframe = document.getElementById('BBH-EMBED-IFRAME');
-            if (chatIframe && chatIframe.style.zIndex < 999999) {
-                chatIframe.style.zIndex = "999999";
-                clearInterval(findChatbotInterval);
-            } else if (chatIframe) {
-                clearInterval(findChatbotInterval);
-            }
-        }, 500);
-
-        // Điều chỉnh kích thước của nút Zalo để khớp với iframe nếu cần
-        const findAndAdjustZalo = setInterval(function() {
-            const chatIframe = document.getElementById('BBH-EMBED-IFRAME');
-            const zaloBtn = document.querySelector('.btn-zalo');
-
-            if (chatIframe && zaloBtn) {
-                // Lấy kích thước của iframe
-                const iframeWidth = chatIframe.offsetWidth;
-                const iframeHeight = chatIframe.offsetHeight;
-
-                // Điều chỉnh kích thước nút Zalo nếu cần
-                if (iframeWidth > 0 && iframeHeight > 0) {
-                    zaloBtn.style.width = iframeWidth + 'px';
-                    zaloBtn.style.height = iframeHeight + 'px';
-                    clearInterval(findAndAdjustZalo);
-                }
-            }
-        }, 500);
-
-        // Hiệu ứng ripple
+        // Hiệu ứng ripple khi click vào các nút
         function createRipple(event) {
             const button = event.currentTarget;
 
@@ -558,7 +546,7 @@
             });
         }
 
-        // Áp dụng hiệu ứng ripple
+        // Áp dụng hiệu ứng ripple cho các nút
         const buttons = document.querySelectorAll('.btn-call, .btn-zalo');
         buttons.forEach(button => {
             button.addEventListener('click', createRipple);
