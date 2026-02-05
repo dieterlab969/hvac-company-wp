@@ -18,24 +18,53 @@
  * @package WordPress
  */
 
+// Load environment variables from .env file
+$env_file = __DIR__ . '/.env';
+if (file_exists($env_file)) {
+    $lines = file($env_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) {
+            continue;
+        }
+        list($name, $value) = explode('=', $line, 2);
+        $name = trim($name);
+        $value = trim($value);
+        if (!array_key_exists($name, $_ENV)) {
+            putenv(sprintf('%s=%s', $name, $value));
+            $_ENV[$name] = $value;
+            $_SERVER[$name] = $value;
+        }
+    }
+}
+
+// Helper function to get environment variables
+function env($key, $default = '') {
+    $value = getenv($key);
+    if ($value === false) {
+        return $default;
+    }
+    // Remove quotes if present
+    return trim($value, "'\"");
+}
+
 // ** Thiết lập MySQL - Bạn có thể lấy các thông tin này từ host/server ** //
 /** Tên database MySQL */
-define('DB_NAME', 'webdlphangia2024');
+define('DB_NAME', env('DB_NAME'));
 
 /** Username của database */
-define('DB_USER', 'pinnacle');
+define('DB_USER', env('DB_USER'));
 
 /** Mật khẩu của database */
-define('DB_PASSWORD', 'pinnacle');
+define('DB_PASSWORD', env('DB_PASSWORD'));
 
 /** Hostname của database */
-define('DB_HOST', 'localhost');
+define('DB_HOST', env('DB_HOST', 'localhost'));
 
 /** Database charset sử dụng để tạo bảng database. */
-define('DB_CHARSET', 'utf8');
+define('DB_CHARSET', env('DB_CHARSET', 'utf8'));
 
 /** Kiểu database collate. Đừng thay đổi nếu không hiểu rõ. */
-define('DB_COLLATE', '');
+define('DB_COLLATE', env('DB_COLLATE', ''));
 
 /**#@+
  * Khóa xác thực và salt.
@@ -48,14 +77,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY', 'khóa không trùng nhau');
-define('SECURE_AUTH_KEY', 'khóa không trùng nhau');
-define('LOGGED_IN_KEY', 'khóa không trùng nhau');
-define('NONCE_KEY', 'khóa không trùng nhau');
-define('AUTH_SALT', 'khóa không trùng nhau');
-define('SECURE_AUTH_SALT', 'khóa không trùng nhau');
-define('LOGGED_IN_SALT', 'khóa không trùng nhau');
-define('NONCE_SALT', 'khóa không trùng nhau');
+define('AUTH_KEY', env('AUTH_KEY', 'khóa không trùng nhau'));
+define('SECURE_AUTH_KEY', env('SECURE_AUTH_KEY', 'khóa không trùng nhau'));
+define('LOGGED_IN_KEY', env('LOGGED_IN_KEY', 'khóa không trùng nhau'));
+define('NONCE_KEY', env('NONCE_KEY', 'khóa không trùng nhau'));
+define('AUTH_SALT', env('AUTH_SALT', 'khóa không trùng nhau'));
+define('SECURE_AUTH_SALT', env('SECURE_AUTH_SALT', 'khóa không trùng nhau'));
+define('LOGGED_IN_SALT', env('LOGGED_IN_SALT', 'khóa không trùng nhau'));
+define('NONCE_SALT', env('NONCE_SALT', 'khóa không trùng nhau'));
 
 /**#@-*/
 
@@ -77,7 +106,7 @@ $table_prefix = 'wp_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define('WP_DEBUG', false);
+define('WP_DEBUG', env('WP_DEBUG', 'false') === 'true');
 
 /* Đó là tất cả thiết lập, ngưng sửa từ phần này trở xuống. Chúc bạn viết blog vui vẻ. */
 

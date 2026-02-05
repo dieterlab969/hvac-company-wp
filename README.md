@@ -1,93 +1,268 @@
-# web-dlphangia2024
+# hvac-company-wp - WordPress Website
 
+A WordPress-based website for Phan Gia company.
 
+## Prerequisites
 
-## Getting started
+Before setting up this project, ensure you have the following installed:
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### Required Software
+- **PHP**: Version 7.4 or higher (8.0+ recommended)
+- **MySQL/MariaDB**: Version 5.7+ or MariaDB 10.3+
+- **Web Server**: Apache 2.4+ or Nginx 1.18+
+- **Composer**: For PHP dependency management (optional)
+- **Git**: For version control
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+### System Requirements
+- Minimum 512MB RAM (1GB+ recommended)
+- At least 1GB of free disk space
+- PHP Extensions:
+  - `mysqli` or `pdo_mysql`
+  - `curl`
+  - `gd` or `imagick`
+  - `mbstring`
+  - `xml`
+  - `zip`
 
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/kenka22/web-dlphangia2024.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/kenka22/web-dlphangia2024/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+### Server Configuration
+- `mod_rewrite` enabled (Apache) or proper URL rewriting configuration (Nginx)
+- HTTPS enabled (recommended for production)
+- Proper file permissions (directories: 755, files: 644)
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Follow these steps to set up the project locally:
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### 1. Clone the Repository
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+```bash
+git clone git@github.com:dieterlab969/hvac-company-wp.git
+cd hvac-company-wp
+```
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+### 2. Configure Database
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Create a MySQL database and user:
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+```sql
+CREATE DATABASE your_database_name;
+CREATE USER 'your_database_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON your_database_name.* TO 'your_database_user'@'localhost';
+FLUSH PRIVILEGES;
+```
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### 3. Configure Environment Variables
+
+Copy the example environment file and configure it:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and update the following variables:
+
+```env
+DB_NAME=your_database_name
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_HOST=localhost
+DB_CHARSET=utf8
+DB_COLLATE=
+
+# Generate unique keys at: https://api.wordpress.org/secret-key/1.1/salt/
+AUTH_KEY='your-unique-auth-key'
+SECURE_AUTH_KEY='your-unique-secure-auth-key'
+LOGGED_IN_KEY='your-unique-logged-in-key'
+NONCE_KEY='your-unique-nonce-key'
+AUTH_SALT='your-unique-auth-salt'
+SECURE_AUTH_SALT='your-unique-secure-auth-salt'
+LOGGED_IN_SALT='your-unique-logged-in-salt'
+NONCE_SALT='your-unique-nonce-salt'
+
+WP_DEBUG=false
+```
+
+### 4. Set File Permissions
+
+```bash
+# Set proper ownership (replace 'www-data' with your web server user)
+sudo chown -R www-data:www-data /path/to/hvac-company-wp
+
+# Set directory permissions
+find . -type d -exec chmod 755 {} \;
+
+# Set file permissions
+find . -type f -exec chmod 644 {} \;
+```
+
+### 5. Configure Web Server
+
+#### Apache Configuration
+
+Ensure `.htaccess` is present and `mod_rewrite` is enabled:
+
+```bash
+sudo a2enmod rewrite
+sudo systemctl restart apache2
+```
+
+#### Nginx Configuration (Example)
+
+```nginx
+server {
+    ## Your website name goes here.
+    server_name yourdomain.com;
+    ## Your only path reference.
+    root /var/www/yourproject;
+    ## This should be in your http block and if it is, it's not needed here.
+    index index.php;
+
+    location = /favicon.ico {
+        log_not_found off;
+        access_log off;
+    }
+
+    location = /robots.txt {
+        allow all;
+        log_not_found off;
+        access_log off;
+    }
+
+    location / {
+        # This is cool because no php is touched for static content.
+        # include the "?$args" part so non-default permalinks doesn't break when using query string
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        #NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+        include fastcgi_params;
+        fastcgi_intercept_errors on;
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        #The following parameter can be also included in fastcgi_params file
+        fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+        expires max;
+        log_not_found off;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+
+# HTTP to HTTPS redirect
+server {
+    if ($host = yourdomain.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    server_name yourdomain.com;
+    listen 80;
+    return 404; # managed by Certbot
+}
+```
+
+### 6. Import Database (if applicable)
+
+If you have a database backup:
+
+```bash
+mysql -u your_database_user -p your_database_name < backup.sql
+```
+
+### 7. Access WordPress
+
+Navigate to your site:
+- Local: `http://localhost/hvac-company-wp`
+- Production: `http://yourdomain.com`
+
+If this is a fresh installation, complete the WordPress setup wizard.
+
+## Configuration
+
+### WordPress Admin Access
+
+- Admin URL: `http://yourdomain.com/wp-admin`
+- Use credentials provided by your team lead or created during installation
+
+### Updating Site URL
+
+If migrating or changing domain:
+
+```bash
+wp-cli.phar search-replace 'old-domain.com' 'new-domain.com' --all-tables
+```
+
+Or manually in database:
+```sql
+UPDATE wp_options SET option_value = 'http://new-domain.com' WHERE option_name = 'siteurl';
+UPDATE wp_options SET option_value = 'http://new-domain.com' WHERE option_name = 'home';
+```
+
+## Development
+
+### Local Development Setup
+
+For local development, you can use:
+- **XAMPP** / **WAMP** / **MAMP**: All-in-one solutions
+- **Docker**: For containerized environments
+- **Local by Flywheel**: WordPress-specific development tool
+
+### Git Workflow
+
+1. Create a new branch for your feature:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+2. Make your changes and commit:
+   ```bash
+   git add .
+   git commit -m "Description of changes"
+   ```
+
+3. Push to GitLab:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+4. Create a merge request on GitLab
+
+## Troubleshooting
+
+### Common Issues
+
+**Database connection errors:**
+- Verify credentials in `.env` file
+- Ensure MySQL service is running
+- Check database user permissions
+
+**White screen of death:**
+- Enable debug mode: Set `WP_DEBUG=true` in `.env`
+- Check PHP error logs
+- Verify file permissions
+
+**Permalink issues:**
+- Ensure `mod_rewrite` is enabled (Apache)
+- Reset permalinks in WordPress Admin: Settings → Permalinks → Save
+
+**File upload issues:**
+- Check `upload_max_filesize` and `post_max_size` in `php.ini`
+- Verify `wp-content/uploads` directory permissions
+
+## Security
+
+- Keep WordPress core, themes, and plugins updated
+- Use strong passwords and enable two-factor authentication
+- Regularly backup your database and files
+- Keep `.env` file secure and never commit it to version control
+- Use HTTPS in production
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Proprietary - All rights reserved
