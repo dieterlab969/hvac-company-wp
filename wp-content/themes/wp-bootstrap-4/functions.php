@@ -491,6 +491,44 @@ function createTaxForCustomPostType() {
 add_action( 'init' , 'createTaxForCustomPostType' );
 
 
+// Create a Certificate Custom Post Type
+function createCertificatePostType() {
+
+	$labels = array(
+		'name'					=>		'Certificate',
+		'singular_name'			=>		'Certificate',
+		'add_new'				=>		'Add New',
+		'add_new_item'			=>		'Add New Certificate',
+		'edit_item'				=>		'Edit Certificate',
+		'view_item'				=>		'View Certificate',
+		'new_item'				=>		'New Certificate',
+		'all_items'				=>		'All Certificates',
+		'search_items'			=>		'Search Certificates',
+		'not_found'				=>		'No certificates found',
+		'not_found_in_trash'	=>		'No certificates found in trash',
+	);
+
+	$args = array(
+		'labels'				=>		$labels,
+		'public'             	=> 		true,
+		'publicly_queryable' 	=> 		true,
+		'show_ui'            	=> 		true,
+		'show_in_menu'       	=> 		true,
+		'query_var'          	=> 		true,
+		'has_archive'        	=> 		true,
+		'rewrite'            	=> 		array( 'slug' => 'certificate' ),
+		'menu_position'			=>		41,
+		'menu_icon'				=>		'dashicons-awards',
+		'supports'           	=> 		array( 'title', 'editor', 'thumbnail'),
+		'capability_type'		=>		'post',
+	);
+
+	register_post_type( 'certificate', $args );
+
+}
+add_action( 'init', 'createCertificatePostType' );
+
+
 function wpa66834_role_admin_body_class( $classes ) {
     global $current_user;
     foreach( $current_user->roles as $role )
