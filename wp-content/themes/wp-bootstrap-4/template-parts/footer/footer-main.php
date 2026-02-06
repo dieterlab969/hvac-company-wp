@@ -60,11 +60,11 @@
 
     <!-- Giữ nguyên phần Zalo nhưng điều chỉnh vị trí để khớp với iframe chatbot -->
     <div class="zalo-box">
-        <a class="btn-zalo" rel="nofollow" target="_blank" href="https://zalo.me/<?php echo preg_replace('/\s+/', '', $hotline); ?>">
+        <a class="btn-zalo" rel="nofollow" target="_blank" href="<?php echo getenv('ZALO_URL') ?: 'https://zalo.me/' . preg_replace('/\s+/', '', $hotline); ?>">
             <span class="btn-zalo__ico"></span>
         </a>
         <div class="btn-zalo__text">
-            <a rel="nofollow" target="_blank" href="https://zalo.me/<?php echo preg_replace('/\s+/', '', $hotline); ?>">Chat Zalo</a>
+            <a rel="nofollow" target="_blank" href="<?php echo getenv('ZALO_URL') ?: 'https://zalo.me/' . preg_replace('/\s+/', '', $hotline); ?>">Chat Zalo</a>
         </div>
     </div>
 </div>
