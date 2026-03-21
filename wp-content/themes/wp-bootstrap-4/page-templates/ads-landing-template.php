@@ -788,13 +788,10 @@ $footer_logo = $al_footer_logo ?: $al_logo;
 
         <div class="al-nav__right">
             <?php if ( $al_nav_cta_phone ) : ?>
-                <a class="al-nav__phone" href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $al_nav_cta_phone ) ); ?>">
+                <a class="al-nav__phone" href="<?php echo esc_url( $al_hero_cta_url ); ?>">
                     <?php echo esc_html( $al_nav_cta_phone ); ?>
                 </a>
             <?php endif; ?>
-            <a href="<?php echo esc_url( $al_hero_cta_url ); ?>" class="al-btn al-btn--orange">
-                <?php echo esc_html( $al_nav_cta_text ); ?>
-            </a>
         </div>
 
         <button class="al-nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="al-drawer">
