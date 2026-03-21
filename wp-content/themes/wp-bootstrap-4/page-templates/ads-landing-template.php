@@ -131,6 +131,8 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         color: var(--al-white);
         font-size: 1.1rem;
         font-weight: 700;
+        font-weight: bold;
+        text-transform: uppercase;
         letter-spacing: .5px;
     }
     .al-nav__links {
@@ -139,22 +141,48 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         list-style: none;
     }
     .al-nav__links a {
-        color: #e0cdb0;
-        font-size: .9rem;
-        font-weight: 500;
+        color: #FFFFFF;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: capitalize;
         transition: color .2s;
         white-space: nowrap;
     }
-    .al-nav__links a:hover { color: var(--al-orange-lt); }
+    .al-nav__links a:hover { color: #FFFACD; }
     .al-nav__right {
         display: flex;
         align-items: center;
         gap: 14px;
     }
+    @-webkit-keyframes pulse {
+        0%   { -webkit-transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,179,55,.6); }
+        70%  { -webkit-transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255,179,55,0); }
+        100% { -webkit-transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,179,55,0); }
+    }
+    @keyframes pulse {
+        0%   { transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,179,55,.6); }
+        70%  { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255,179,55,0); }
+        100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,179,55,0); }
+    }
     .al-nav__phone {
-        color: var(--al-orange-lt);
+        display: inline-block;
+        padding: 8px 18px;
+        border-radius: 6px;
+        color: #fff;
         font-weight: 700;
-        font-size: .95rem;
+        font-size: 15px;
+        white-space: nowrap;
+        background: rgba(255,179,55,1.0);
+        background: -webkit-linear-gradient(180deg, rgba(255,179,55,1.0), rgba(239,80,1,1.0));
+        background: linear-gradient(180deg, rgba(255,179,55,1.0), rgba(239,80,1,1.0));
+        -webkit-animation-name: pulse;
+        animation-name: pulse;
+        -webkit-animation-delay: 1s;
+        animation-delay: 1s;
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
     }
     .al-btn {
         display: inline-block;
