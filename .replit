@@ -12,7 +12,7 @@ externalPort = 80
 
 [[ports]]
 localPort = 5000
-externalPort = 5000
+externalPort = 80
 
 [workflows]
 runButton = "Project"
@@ -41,3 +41,9 @@ outputType = "webview"
 [deployment]
 deploymentTarget = "autoscale"
 run = ["bash", "start.sh"]
+
+[userenv]
+
+[userenv.shared]
+ZALO_URL = "https://zalo.me/164848896161853582"
+WP_DEBUG = "false"
