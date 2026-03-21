@@ -7,6 +7,7 @@
  * @package WP_Bootstrap_4
  */
 
+require_once get_template_directory() . '/wp-cli-ads-landing.php';
 // Load environment variables
 function load_env_variables() {
     $env_file = ABSPATH . '.env';
@@ -29,56 +30,56 @@ function load_env_variables() {
 load_env_variables();
 
 if ( ! function_exists( 'wp_bootstrap_4_setup' ) ) :
-	function wp_bootstrap_4_setup() {
+        function wp_bootstrap_4_setup() {
 
-		// Make theme available for translation.
-		load_theme_textdomain( 'wp-bootstrap-4', get_template_directory() . '/languages' );
+                // Make theme available for translation.
+                load_theme_textdomain( 'wp-bootstrap-4', get_template_directory() . '/languages' );
 
-		// Add default posts and comments RSS feed links to head.
-		add_theme_support( 'automatic-feed-links' );
+                // Add default posts and comments RSS feed links to head.
+                add_theme_support( 'automatic-feed-links' );
 
-		// Let WordPress manage the document title.
-		add_theme_support( 'title-tag' );
+                // Let WordPress manage the document title.
+                add_theme_support( 'title-tag' );
 
-		// Enable support for Post Thumbnails on posts and pages.
-		add_theme_support( 'post-thumbnails' );
+                // Enable support for Post Thumbnails on posts and pages.
+                add_theme_support( 'post-thumbnails' );
 
-		// Enable Post formats
-		add_theme_support( 'post-formats', array( 'gallery', 'video', 'audio', 'status', 'quote', 'link' ) );
+                // Enable Post formats
+                add_theme_support( 'post-formats', array( 'gallery', 'video', 'audio', 'status', 'quote', 'link' ) );
 
-		// Enable support for woocommerce.
-		add_theme_support( 'woocommerce' );
+                // Enable support for woocommerce.
+                add_theme_support( 'woocommerce' );
 
-		// This theme uses wp_nav_menu() in one location.
-		register_nav_menus( array(
-			'menu-1' => esc_html__( 'Primary', 'wp-bootstrap-4' ),
-		) );
+                // This theme uses wp_nav_menu() in one location.
+                register_nav_menus( array(
+                        'menu-1' => esc_html__( 'Primary', 'wp-bootstrap-4' ),
+                ) );
 
-		// Switch default core markup for search form, comment form, and comments
-		add_theme_support( 'html5', array(
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-		) );
+                // Switch default core markup for search form, comment form, and comments
+                add_theme_support( 'html5', array(
+                        'comment-form',
+                        'comment-list',
+                        'gallery',
+                        'caption',
+                ) );
 
-		// Set up the WordPress core custom background feature.
-		add_theme_support( 'custom-background', apply_filters( 'wp_bootstrap_4_custom_background_args', array(
-			'default-color' => 'f8f9fa',
-			'default-image' => '',
-		) ) );
+                // Set up the WordPress core custom background feature.
+                add_theme_support( 'custom-background', apply_filters( 'wp_bootstrap_4_custom_background_args', array(
+                        'default-color' => 'f8f9fa',
+                        'default-image' => '',
+                ) ) );
 
-		// Add theme support for selective refresh for widgets.
-		add_theme_support( 'customize-selective-refresh-widgets' );
+                // Add theme support for selective refresh for widgets.
+                add_theme_support( 'customize-selective-refresh-widgets' );
 
-		// Add support for core custom logo.
-		add_theme_support( 'custom-logo', array(
-			'height'      => 250,
-			'width'       => 250,
-			'flex-width'  => true,
-			'flex-height' => true,
-		) );
-	}
+                // Add support for core custom logo.
+                add_theme_support( 'custom-logo', array(
+                        'height'      => 250,
+                        'width'       => 250,
+                        'flex-width'  => true,
+                        'flex-height' => true,
+                ) );
+        }
 endif;
 add_action( 'after_setup_theme', 'wp_bootstrap_4_setup' );
 
@@ -93,7 +94,7 @@ add_action( 'after_setup_theme', 'wp_bootstrap_4_setup' );
  * @global int $content_width
  */
 function wp_bootstrap_4_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'wp_bootstrap_4_content_width', 800 );
+        $GLOBALS['content_width'] = apply_filters( 'wp_bootstrap_4_content_width', 800 );
 }
 add_action( 'after_setup_theme', 'wp_bootstrap_4_content_width', 0 );
 
@@ -106,55 +107,55 @@ add_action( 'after_setup_theme', 'wp_bootstrap_4_content_width', 0 );
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 function wp_bootstrap_4_widgets_init() {
-	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'wp-bootstrap-4' ),
-		'id'            => 'sidebar-1',
-		'description'   => esc_html__( 'Add widgets here.', 'wp-bootstrap-4' ),
-		'before_widget' => '<section id="%1$s" class="widget border-bottom %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h5 class="widget-title h6">',
-		'after_title'   => '</h5>',
-	) );
+        register_sidebar( array(
+                'name'          => esc_html__( 'Sidebar', 'wp-bootstrap-4' ),
+                'id'            => 'sidebar-1',
+                'description'   => esc_html__( 'Add widgets here.', 'wp-bootstrap-4' ),
+                'before_widget' => '<section id="%1$s" class="widget border-bottom %2$s">',
+                'after_widget'  => '</section>',
+                'before_title'  => '<h5 class="widget-title h6">',
+                'after_title'   => '</h5>',
+        ) );
 
-	register_sidebar( array(
-		'name'          => esc_html__( 'Footer Column 1', 'wp-bootstrap-4' ),
-		'id'            => 'footer-1',
-		'description'   => esc_html__( 'Add widgets here.', 'wp-bootstrap-4' ),
-		'before_widget' => '<section id="%1$s" class="widget wp-bp-footer-widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h5 class="widget-title h6">',
-		'after_title'   => '</h5>',
-	) );
+        register_sidebar( array(
+                'name'          => esc_html__( 'Footer Column 1', 'wp-bootstrap-4' ),
+                'id'            => 'footer-1',
+                'description'   => esc_html__( 'Add widgets here.', 'wp-bootstrap-4' ),
+                'before_widget' => '<section id="%1$s" class="widget wp-bp-footer-widget %2$s">',
+                'after_widget'  => '</section>',
+                'before_title'  => '<h5 class="widget-title h6">',
+                'after_title'   => '</h5>',
+        ) );
 
-	register_sidebar( array(
-		'name'          => esc_html__( 'Footer Column 2', 'wp-bootstrap-4' ),
-		'id'            => 'footer-2',
-		'description'   => esc_html__( 'Add widgets here.', 'wp-bootstrap-4' ),
-		'before_widget' => '<section id="%1$s" class="widget wp-bp-footer-widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h5 class="widget-title h6">',
-		'after_title'   => '</h5>',
-	) );
+        register_sidebar( array(
+                'name'          => esc_html__( 'Footer Column 2', 'wp-bootstrap-4' ),
+                'id'            => 'footer-2',
+                'description'   => esc_html__( 'Add widgets here.', 'wp-bootstrap-4' ),
+                'before_widget' => '<section id="%1$s" class="widget wp-bp-footer-widget %2$s">',
+                'after_widget'  => '</section>',
+                'before_title'  => '<h5 class="widget-title h6">',
+                'after_title'   => '</h5>',
+        ) );
 
-	register_sidebar( array(
-		'name'          => esc_html__( 'Footer Column 3', 'wp-bootstrap-4' ),
-		'id'            => 'footer-3',
-		'description'   => esc_html__( 'Add widgets here.', 'wp-bootstrap-4' ),
-		'before_widget' => '<section id="%1$s" class="widget wp-bp-footer-widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h5 class="widget-title h6">',
-		'after_title'   => '</h5>',
-	) );
+        register_sidebar( array(
+                'name'          => esc_html__( 'Footer Column 3', 'wp-bootstrap-4' ),
+                'id'            => 'footer-3',
+                'description'   => esc_html__( 'Add widgets here.', 'wp-bootstrap-4' ),
+                'before_widget' => '<section id="%1$s" class="widget wp-bp-footer-widget %2$s">',
+                'after_widget'  => '</section>',
+                'before_title'  => '<h5 class="widget-title h6">',
+                'after_title'   => '</h5>',
+        ) );
 
-	register_sidebar( array(
-		'name'          => esc_html__( 'Footer Column 4', 'wp-bootstrap-4' ),
-		'id'            => 'footer-4',
-		'description'   => esc_html__( 'Add widgets here.', 'wp-bootstrap-4' ),
-		'before_widget' => '<section id="%1$s" class="widget wp-bp-footer-widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h5 class="widget-title h6">',
-		'after_title'   => '</h5>',
-	) );
+        register_sidebar( array(
+                'name'          => esc_html__( 'Footer Column 4', 'wp-bootstrap-4' ),
+                'id'            => 'footer-4',
+                'description'   => esc_html__( 'Add widgets here.', 'wp-bootstrap-4' ),
+                'before_widget' => '<section id="%1$s" class="widget wp-bp-footer-widget %2$s">',
+                'after_widget'  => '</section>',
+                'before_title'  => '<h5 class="widget-title h6">',
+                'after_title'   => '</h5>',
+        ) );
 }
 add_action( 'widgets_init', 'wp_bootstrap_4_widgets_init' );
 
@@ -165,30 +166,30 @@ add_action( 'widgets_init', 'wp_bootstrap_4_widgets_init' );
  * Enqueue scripts and styles.
  */
 function wp_bootstrap_4_scripts() {
-	wp_enqueue_style( 'open-iconic-bootstrap', get_template_directory_uri() . '/assets/css/open-iconic-bootstrap.css', array(), 'v4.0.0', 'all' );
-	wp_enqueue_style( 'bootstrap-4', get_template_directory_uri() . '/assets/css/bootstrap.css', array(), 'v4.0.0', 'all' );
-	// wp_enqueue_style( 'wp-bootstrap-4-style', get_stylesheet_uri(), array(), '1.0.2', 'all' );
-	wp_enqueue_style( 'bootstrap-4-custom', get_template_directory_uri() . '/assets/css/custom.css', array(), 'v1.0.0', 'all' );
-	wp_enqueue_style( 'bootstrap-4-swiper', get_template_directory_uri() . '/assets/css/swiper.min.css', array(), 'v1.0.0', 'all' );
-	wp_enqueue_style( 'bootstrap-4-scroll', get_template_directory_uri() . '/assets/css/jquery.simplyscroll.css', array(), 'v1.0.0', 'all' );
+        wp_enqueue_style( 'open-iconic-bootstrap', get_template_directory_uri() . '/assets/css/open-iconic-bootstrap.css', array(), 'v4.0.0', 'all' );
+        wp_enqueue_style( 'bootstrap-4', get_template_directory_uri() . '/assets/css/bootstrap.css', array(), 'v4.0.0', 'all' );
+        // wp_enqueue_style( 'wp-bootstrap-4-style', get_stylesheet_uri(), array(), '1.0.2', 'all' );
+        wp_enqueue_style( 'bootstrap-4-custom', get_template_directory_uri() . '/assets/css/custom.css', array(), 'v1.0.0', 'all' );
+        wp_enqueue_style( 'bootstrap-4-swiper', get_template_directory_uri() . '/assets/css/swiper.min.css', array(), 'v1.0.0', 'all' );
+        wp_enqueue_style( 'bootstrap-4-scroll', get_template_directory_uri() . '/assets/css/jquery.simplyscroll.css', array(), 'v1.0.0', 'all' );
 
-	// carousel 
-	wp_enqueue_style( 'bootstrap-4-carousel', get_template_directory_uri() . '/assets/css/carousel/owl.carousel.min.css', array(), 'v2.3.4', 'all' );
-	wp_enqueue_style( 'bootstrap-4-carousel-theme', get_template_directory_uri() . '/assets/css/carousel/owl.theme.default.min.css', array(), 'v2.3.4', 'all' );
-	wp_enqueue_style( 'slick-css', get_stylesheet_directory_uri() . '/assets/css/slick.css' );
-	wp_enqueue_style( 'slick-theme', get_stylesheet_directory_uri() . '/assets/css/slick-theme.css' );
-	wp_enqueue_script( 'slick-js', get_stylesheet_directory_uri() . '/assets/js/slick.min.js', array('jquery'), true );
+        // carousel 
+        wp_enqueue_style( 'bootstrap-4-carousel', get_template_directory_uri() . '/assets/css/carousel/owl.carousel.min.css', array(), 'v2.3.4', 'all' );
+        wp_enqueue_style( 'bootstrap-4-carousel-theme', get_template_directory_uri() . '/assets/css/carousel/owl.theme.default.min.css', array(), 'v2.3.4', 'all' );
+        wp_enqueue_style( 'slick-css', get_stylesheet_directory_uri() . '/assets/css/slick.css' );
+        wp_enqueue_style( 'slick-theme', get_stylesheet_directory_uri() . '/assets/css/slick-theme.css' );
+        wp_enqueue_script( 'slick-js', get_stylesheet_directory_uri() . '/assets/js/slick.min.js', array('jquery'), true );
 
     // js include
-	wp_enqueue_script( 'bootstrap-4-js', get_template_directory_uri() . '/assets/js/bootstrap.js', array('jquery'), 'v4.0.0', true );
+        wp_enqueue_script( 'bootstrap-4-js', get_template_directory_uri() . '/assets/js/bootstrap.js', array('jquery'), 'v4.0.0', true );
     wp_enqueue_script( 'bootstrap-4-js-carousel', get_template_directory_uri() . '/assets/js/carousel/owl.carousel.min.js', array('jquery'), 'v2.3.4', true );
     wp_enqueue_script( 'bootstrap-4-js-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), 'v1.0.0', true );
     wp_enqueue_script( 'bootstrap-4-js-swiper', get_template_directory_uri() . '/assets/js/swiper.min.js', array('jquery'), 'v1.0.0', true );
     wp_enqueue_script( 'bootstrap-4-js-scroll', get_template_directory_uri() . '/assets/js/jquery.simplyscroll.min.js', array('jquery'), 'v1.0.0', true );
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+        if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+                wp_enqueue_script( 'comment-reply' );
+        }
 }
 add_action( 'wp_enqueue_scripts', 'wp_bootstrap_4_scripts' );
 
@@ -228,12 +229,12 @@ require get_template_directory() . '/inc/customizer.php';
 
 // Load Jetpack compatibility file.
 if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
+        require get_template_directory() . '/inc/jetpack.php';
 }
 
 // Load WooCommerce compatibility file.
 if ( class_exists( 'WooCommerce' ) ) {
-	// require get_template_directory() . '/inc/woocommerce.php';
+        // require get_template_directory() . '/inc/woocommerce.php';
 }
 
 // Breadcrumb
@@ -344,63 +345,63 @@ add_action( 'wp_head', 'insert_fb_in_head', 5 );
 
 // Theme get_option
 if( function_exists('acf_add_options_page') ) {
-	acf_add_options_page(array(
-		'page_title' 	=> 'Thông Tin Website',
-		'menu_title'	=> 'Thông Tin Website',
-		'menu_slug' 	=> 'theme-options',
-		'capability'	=> 'edit_posts',
-		// 'redirect'		=> false
-	));
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Quản lý thông tin chung',
-		'menu_title'	=> 'Quản lý thông tin chung',
-		'parent_slug'	=> 'theme-options',
-	));
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Banner',
-		'menu_title'	=> 'Banner',
-		'parent_slug'	=> 'theme-options',
-	));
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Liên hệ',
-		'menu_title'	=> 'Liên hệ',
-		'parent_slug'	=> 'theme-options',
-	));
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Footer',
-		'menu_title'	=> 'Footer',
-		'parent_slug'	=> 'theme-options',
-	));
+        acf_add_options_page(array(
+                'page_title'    => 'Thông Tin Website',
+                'menu_title'    => 'Thông Tin Website',
+                'menu_slug'     => 'theme-options',
+                'capability'    => 'edit_posts',
+                // 'redirect'           => false
+        ));
+        acf_add_options_sub_page(array(
+                'page_title'    => 'Quản lý thông tin chung',
+                'menu_title'    => 'Quản lý thông tin chung',
+                'parent_slug'   => 'theme-options',
+        ));
+        acf_add_options_sub_page(array(
+                'page_title'    => 'Banner',
+                'menu_title'    => 'Banner',
+                'parent_slug'   => 'theme-options',
+        ));
+        acf_add_options_sub_page(array(
+                'page_title'    => 'Liên hệ',
+                'menu_title'    => 'Liên hệ',
+                'parent_slug'   => 'theme-options',
+        ));
+        acf_add_options_sub_page(array(
+                'page_title'    => 'Footer',
+                'menu_title'    => 'Footer',
+                'parent_slug'   => 'theme-options',
+        ));
 
-	acf_add_options_page(array(
-		'page_title' 	=> 'Ý Kiến Khách Hàng',
-		'menu_title'	=> 'Ý Kiến Khách Hàng',
-		'menu_slug' 	=> 'review-options',
-		'capability'	=> 'edit_posts'
-	));
-	acf_add_options_page(array(
-		'page_title' 	=> 'Nổi Bật',
-		'menu_title'	=> 'Nổi Bật',
-		'menu_slug' 	=> 'feature-options',
-		'capability'	=> 'edit_posts'
-	));
+        acf_add_options_page(array(
+                'page_title'    => 'Ý Kiến Khách Hàng',
+                'menu_title'    => 'Ý Kiến Khách Hàng',
+                'menu_slug'     => 'review-options',
+                'capability'    => 'edit_posts'
+        ));
+        acf_add_options_page(array(
+                'page_title'    => 'Nổi Bật',
+                'menu_title'    => 'Nổi Bật',
+                'menu_slug'     => 'feature-options',
+                'capability'    => 'edit_posts'
+        ));
 
-	acf_add_options_page(array(
-		'page_title' 	=> 'Quản lý hình ảnh',
-		'menu_title'	=> 'Quản lý hình ảnh',
-		'menu_slug' 	=> 'image-options',
-		'capability'	=> 'edit_posts'
-	));
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Quản lý logo đối tác',
-		'menu_title'	=> 'Quản lý logo đối tác',
-		'parent_slug'	=> 'image-options',
-	));
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Quản lý slider',
-		'menu_title'	=> 'Quản lý slider',
-		'parent_slug'	=> 'image-options',
-	));
+        acf_add_options_page(array(
+                'page_title'    => 'Quản lý hình ảnh',
+                'menu_title'    => 'Quản lý hình ảnh',
+                'menu_slug'     => 'image-options',
+                'capability'    => 'edit_posts'
+        ));
+        acf_add_options_sub_page(array(
+                'page_title'    => 'Quản lý logo đối tác',
+                'menu_title'    => 'Quản lý logo đối tác',
+                'parent_slug'   => 'image-options',
+        ));
+        acf_add_options_sub_page(array(
+                'page_title'    => 'Quản lý slider',
+                'menu_title'    => 'Quản lý slider',
+                'parent_slug'   => 'image-options',
+        ));
 
 }
 
@@ -449,32 +450,32 @@ add_filter( 'get_the_archive_title', function ($title) {
 // Create a Product Custom Post Type 
 function createProductPostType() {
 
-	$labels = array(
-		'name'					=>		'Thanh Lý',
-		'singular_name'			=>		'Thanh Lý',
-		'add_new'				=>		'Thêm mới',
-		'add_new_item'			=>		'Thêm Thanh Lý Mới',
-		'edit_item'				=>		'Sửa Thanh Lý',
-		'view_item'				=>		'Xem Thanh Lý',
-		'new_item'				=>		'Thanh Lý Mới',
-		'all_items'				=>		'Tất cả Thanh Lý',
-	);
+        $labels = array(
+                'name'                                  =>              'Thanh Lý',
+                'singular_name'                 =>              'Thanh Lý',
+                'add_new'                               =>              'Thêm mới',
+                'add_new_item'                  =>              'Thêm Thanh Lý Mới',
+                'edit_item'                             =>              'Sửa Thanh Lý',
+                'view_item'                             =>              'Xem Thanh Lý',
+                'new_item'                              =>              'Thanh Lý Mới',
+                'all_items'                             =>              'Tất cả Thanh Lý',
+        );
 
-	$args = array(
-		'labels'				=>		$labels,
-		'public'             	=> 		true,
-		'publicly_queryable' 	=> 		true,
-		'show_ui'            	=> 		true,
-		'show_in_menu'       	=> 		true,
-		'query_var'          	=> 		true,
-		'has_archive'        	=> 		true,		
-		'rewrite'            	=> 		array( 'slug' => 'thanh-ly' ),
-		'menu_position'			=>		40,
-		'menu_icon'				=>		'dashicons-cart',
-		'supports'           	=> array( 'title', 'editor', 'thumbnail'),
-	);	
+        $args = array(
+                'labels'                                =>              $labels,
+                'public'                =>              true,
+                'publicly_queryable'    =>              true,
+                'show_ui'               =>              true,
+                'show_in_menu'          =>              true,
+                'query_var'             =>              true,
+                'has_archive'           =>              true,           
+                'rewrite'               =>              array( 'slug' => 'thanh-ly' ),
+                'menu_position'                 =>              40,
+                'menu_icon'                             =>              'dashicons-cart',
+                'supports'              => array( 'title', 'editor', 'thumbnail'),
+        );      
 
-	register_post_type( 'thanh-ly',$args );
+        register_post_type( 'thanh-ly',$args );
 
 }
 add_action( 'init' , 'createProductPostType' );
@@ -482,30 +483,30 @@ add_action( 'init' , 'createProductPostType' );
 // Create a Custom Taxonomy for Product Post Type 
 function createTaxForCustomPostType() {
 
-	$labels	= array(
-		'name'              => 'Danh Mục Thanh Lý',
-		'singular_name'     => 'Danh Mục Thanh Lý',
-		'search_items'      => 'Tìm Danh Mục ',
-		'all_items'         => 'Tất cả danh mục',
-		'parent_item'       => 'Danh mục cha ',
-		'parent_item_colon' => 'Danh mục cha: ',
-		'edit_item'         => 'Sửa danh mục ',
-		'update_item'       => 'Cập nhật danh mục ',
-		'add_new_item'      => 'Thêm danh mục mới',
-		'new_item_name'     => 'Tên danh mục mới',
-		'menu_name'         => 'Danh mục thanh lý',
-	);
+        $labels = array(
+                'name'              => 'Danh Mục Thanh Lý',
+                'singular_name'     => 'Danh Mục Thanh Lý',
+                'search_items'      => 'Tìm Danh Mục ',
+                'all_items'         => 'Tất cả danh mục',
+                'parent_item'       => 'Danh mục cha ',
+                'parent_item_colon' => 'Danh mục cha: ',
+                'edit_item'         => 'Sửa danh mục ',
+                'update_item'       => 'Cập nhật danh mục ',
+                'add_new_item'      => 'Thêm danh mục mới',
+                'new_item_name'     => 'Tên danh mục mới',
+                'menu_name'         => 'Danh mục thanh lý',
+        );
 
-	$args = array(
-		'hierarchical'      => true,
-		'labels'            => $labels,
-		'show_ui'           => true,
-		'show_admin_column' => true,
-		'query_var'         => true,
-		'rewrite'           => array( 'slug' => 'danh-muc' ),
-	);
+        $args = array(
+                'hierarchical'      => true,
+                'labels'            => $labels,
+                'show_ui'           => true,
+                'show_admin_column' => true,
+                'query_var'         => true,
+                'rewrite'           => array( 'slug' => 'danh-muc' ),
+        );
 
-	register_taxonomy( 'danh-muc', array( 'thanh-ly' ), $args );
+        register_taxonomy( 'danh-muc', array( 'thanh-ly' ), $args );
 
 }
 
@@ -515,36 +516,36 @@ add_action( 'init' , 'createTaxForCustomPostType' );
 // Create a Certificate Custom Post Type
 function createCertificatePostType() {
 
-	$labels = array(
-		'name'					=>		'Certificate',
-		'singular_name'			=>		'Certificate',
-		'add_new'				=>		'Add New',
-		'add_new_item'			=>		'Add New Certificate',
-		'edit_item'				=>		'Edit Certificate',
-		'view_item'				=>		'View Certificate',
-		'new_item'				=>		'New Certificate',
-		'all_items'				=>		'All Certificates',
-		'search_items'			=>		'Search Certificates',
-		'not_found'				=>		'No certificates found',
-		'not_found_in_trash'	=>		'No certificates found in trash',
-	);
+        $labels = array(
+                'name'                                  =>              'Certificate',
+                'singular_name'                 =>              'Certificate',
+                'add_new'                               =>              'Add New',
+                'add_new_item'                  =>              'Add New Certificate',
+                'edit_item'                             =>              'Edit Certificate',
+                'view_item'                             =>              'View Certificate',
+                'new_item'                              =>              'New Certificate',
+                'all_items'                             =>              'All Certificates',
+                'search_items'                  =>              'Search Certificates',
+                'not_found'                             =>              'No certificates found',
+                'not_found_in_trash'    =>              'No certificates found in trash',
+        );
 
-	$args = array(
-		'labels'				=>		$labels,
-		'public'             	=> 		true,
-		'publicly_queryable' 	=> 		true,
-		'show_ui'            	=> 		true,
-		'show_in_menu'       	=> 		true,
-		'query_var'          	=> 		true,
-		'has_archive'        	=> 		true,
-		'rewrite'            	=> 		array( 'slug' => 'certificate' ),
-		'menu_position'			=>		41,
-		'menu_icon'				=>		'dashicons-awards',
-		'supports'           	=> 		array( 'title', 'editor', 'thumbnail'),
-		'capability_type'		=>		'post',
-	);
+        $args = array(
+                'labels'                                =>              $labels,
+                'public'                =>              true,
+                'publicly_queryable'    =>              true,
+                'show_ui'               =>              true,
+                'show_in_menu'          =>              true,
+                'query_var'             =>              true,
+                'has_archive'           =>              true,
+                'rewrite'               =>              array( 'slug' => 'certificate' ),
+                'menu_position'                 =>              41,
+                'menu_icon'                             =>              'dashicons-awards',
+                'supports'              =>              array( 'title', 'editor', 'thumbnail'),
+                'capability_type'               =>              'post',
+        );
 
-	register_post_type( 'certificate', $args );
+        register_post_type( 'certificate', $args );
 
 }
 add_action( 'init', 'createCertificatePostType' );
@@ -573,3 +574,16 @@ function add_botbanhang_chatbox() {
     <?php
 }
 add_action('wp_footer', 'add_botbanhang_chatbox');
+
+
+/**
+ * Ads Landing Page — ACF Field Registration
+ * Fields appear in WordPress admin when editing any page that uses the
+ * "Ads Landing Template". All page content is editable without touching code.
+ */
+add_action( 'acf/init', function () {
+    $file = get_template_directory() . '/inc/acf-ads-landing.php';
+    if ( file_exists( $file ) ) {
+        require_once $file;
+    }
+} );
