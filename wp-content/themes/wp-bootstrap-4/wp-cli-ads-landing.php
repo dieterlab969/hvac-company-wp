@@ -81,6 +81,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
          'al_form_title' => 'ĐỂ LẠI THÔNG TIN',
          'al_form_subtitle' => 'ĐỂ ĐƯỢC TƯ VẤN MIỄN PHÍ',
+         'al_form_shortcode' => '[contact-form-7 id="211" title="Form Đăng Ký"]',
          'al_hotline' => '1900 XXXX XX',
 
          'al_footer_company' => 'MYSTORE.COM - MY SHOP OR COMPANY NAME',
