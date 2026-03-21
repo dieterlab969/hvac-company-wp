@@ -2,17 +2,6 @@
 /**
  * Cấu hình cơ bản cho WordPress
  *
- * Trong quá trình cài đặt, file "wp-config.php" sẽ được tạo dựa trên nội dung
- * mẫu của file này. Bạn không bắt buộc phải sử dụng giao diện web để cài đặt,
- * chỉ cần lưu file này lại với tên "wp-config.php" và điền các thông tin cần thiết.
- *
- * File này chứa các thiết lập sau:
- *
- * * Thiết lập MySQL
- * * Các khóa bí mật
- * * Tiền tố cho các bảng database
- * * ABSPATH
- *
  * @link https://codex.wordpress.org/Editing_wp-config.php
  *
  * @package WordPress
@@ -24,6 +13,9 @@ if (file_exists($env_file)) {
     $lines = file($env_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
         if (strpos(trim($line), '#') === 0) {
+            continue;
+        }
+        if (strpos($line, '=') === false) {
             continue;
         }
         list($name, $value) = explode('=', $line, 2);
@@ -47,73 +39,74 @@ function env($key, $default = '') {
     return trim($value, "'\"");
 }
 
-// ** Thiết lập MySQL - Bạn có thể lấy các thông tin này từ host/server ** //
-/** Tên database MySQL */
-define('DB_NAME', env('DB_NAME'));
+// Trust Replit reverse proxy - detect HTTPS from proxy headers
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+    $_SERVER['HTTPS'] = 'on';
+}
+if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+    $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
+}
 
-/** Username của database */
-define('DB_USER', env('DB_USER'));
+// Dynamic site URL based on request host for Replit compatibility
+$site_host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost:5000');
+$site_scheme = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+$site_url = $site_scheme . '://' . $site_host;
 
-/** Mật khẩu của database */
-define('DB_PASSWORD', env('DB_PASSWORD'));
+define('WP_HOME', env('WP_HOME', $site_url));
+define('WP_SITEURL', env('WP_SITEURL', $site_url));
 
-/** Hostname của database */
+// ** SQLite / MySQL settings ** //
+// Using SQLite via the sqlite-database-integration plugin drop-in
+define('DB_ENGINE', 'sqlite');
+define('DB_DIR', ABSPATH . 'wp-content/database/');
+define('DB_FILE', '.ht.sqlite');
+
+// MySQL settings (unused when SQLite is active, but defined to avoid errors)
+define('DB_NAME', env('DB_NAME', 'wordpress'));
+define('DB_USER', env('DB_USER', 'root'));
+define('DB_PASSWORD', env('DB_PASSWORD', ''));
 define('DB_HOST', env('DB_HOST', 'localhost'));
-
-/** Database charset sử dụng để tạo bảng database. */
 define('DB_CHARSET', env('DB_CHARSET', 'utf8'));
-
-/** Kiểu database collate. Đừng thay đổi nếu không hiểu rõ. */
 define('DB_COLLATE', env('DB_COLLATE', ''));
 
 /**#@+
- * Khóa xác thực và salt.
- *
- * Thay đổi các giá trị dưới đây thành các khóa không trùng nhau!
- * Bạn có thể tạo ra các khóa này bằng công cụ
- * {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
- * Bạn có thể thay đổi chúng bất cứ lúc nào để vô hiệu hóa tất cả
- * các cookie hiện có. Điều này sẽ buộc tất cả người dùng phải đăng nhập lại.
- *
+ * Authentication keys and salts.
  * @since 2.6.0
  */
-define('AUTH_KEY', env('AUTH_KEY', 'khóa không trùng nhau'));
-define('SECURE_AUTH_KEY', env('SECURE_AUTH_KEY', 'khóa không trùng nhau'));
-define('LOGGED_IN_KEY', env('LOGGED_IN_KEY', 'khóa không trùng nhau'));
-define('NONCE_KEY', env('NONCE_KEY', 'khóa không trùng nhau'));
-define('AUTH_SALT', env('AUTH_SALT', 'khóa không trùng nhau'));
-define('SECURE_AUTH_SALT', env('SECURE_AUTH_SALT', 'khóa không trùng nhau'));
-define('LOGGED_IN_SALT', env('LOGGED_IN_SALT', 'khóa không trùng nhau'));
-define('NONCE_SALT', env('NONCE_SALT', 'khóa không trùng nhau'));
-
+define('AUTH_KEY',         env('AUTH_KEY',         'replit-auth-key-unique-xk2p9mq7'));
+define('SECURE_AUTH_KEY',  env('SECURE_AUTH_KEY',  'replit-secure-auth-key-n4r8vw3j'));
+define('LOGGED_IN_KEY',    env('LOGGED_IN_KEY',    'replit-logged-in-key-h7t2ys6m'));
+define('NONCE_KEY',        env('NONCE_KEY',        'replit-nonce-key-c5q9px4l'));
+define('AUTH_SALT',        env('AUTH_SALT',        'replit-auth-salt-w8e3uz1k'));
+define('SECURE_AUTH_SALT', env('SECURE_AUTH_SALT', 'replit-secure-auth-salt-b6f4rv2n'));
+define('LOGGED_IN_SALT',   env('LOGGED_IN_SALT',   'replit-logged-in-salt-d9m5ty7q'));
+define('NONCE_SALT',       env('NONCE_SALT',       'replit-nonce-salt-g3k8ws0p'));
 /**#@-*/
 
 /**
- * Tiền tố cho bảng database.
- *
- * Đặt tiền tố cho bảng giúp bạn có thể cài nhiều site WordPress vào cùng một database.
- * Chỉ sử dụng số, ký tự và dấu gạch dưới!
+ * WordPress database table prefix.
  */
 $table_prefix = 'wp_';
 
 /**
- * Dành cho developer: Chế độ debug.
- *
- * Thay đổi hằng số này thành true sẽ làm hiện lên các thông báo trong quá trình phát triển.
- * Chúng tôi khuyến cáo các developer sử dụng WP_DEBUG trong quá trình phát triển plugin và theme.
- *
- * Để có thông tin về các hằng số khác có thể sử dụng khi debug, hãy xem tại Codex.
- *
- * @link https://codex.wordpress.org/Debugging_in_WordPress
+ * WordPress debugging mode.
  */
 define('WP_DEBUG', env('WP_DEBUG', 'false') === 'true');
+define('WP_DEBUG_LOG', false);
+define('WP_DEBUG_DISPLAY', false);
 
-/* Đó là tất cả thiết lập, ngưng sửa từ phần này trở xuống. Chúc bạn viết blog vui vẻ. */
+// Disable automatic updates in development
+define('AUTOMATIC_UPDATER_DISABLED', true);
 
-/** Đường dẫn tuyệt đối đến thư mục cài đặt WordPress. */
+// Allow filesystem operations without FTP
+define('FS_METHOD', 'direct');
+
+/* That's all, stop editing! Happy publishing. */
+
+/** Absolute path to the WordPress directory. */
 if (!defined('ABSPATH')) {
-	define('ABSPATH', dirname(__FILE__) . '/');
+    define('ABSPATH', dirname(__FILE__) . '/');
 }
 
-/** Thiết lập biến và include file. */
+/** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
