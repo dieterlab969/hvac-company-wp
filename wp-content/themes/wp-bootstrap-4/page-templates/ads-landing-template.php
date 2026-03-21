@@ -148,7 +148,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         transition: color .2s;
         white-space: nowrap;
     }
-    .al-nav__links a:hover { color: #FFFACD; }
+    .al-nav__links a:hover { color: var(--al-orange-lt); }
     .al-nav__right {
         display: flex;
         align-items: center;
