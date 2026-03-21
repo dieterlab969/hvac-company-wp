@@ -7,6 +7,7 @@
  * @package WP_Bootstrap_4
  */
 
+require_once get_template_directory() . '/wp-cli-ads-landing.php';
 // Load environment variables
 function load_env_variables() {
     $env_file = ABSPATH . '.env';
