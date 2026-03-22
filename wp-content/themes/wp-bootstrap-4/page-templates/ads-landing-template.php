@@ -29,7 +29,11 @@ function al_field( $name ) {
 
 // Pre-fetch all ACF fields for this page
 $al_logo               = al_field( 'al_logo' );
-$al_nav_links          = al_field( 'al_nav_links' );
+$al_nav_links          = al_field( 'al_nav_links' ) ?: array(
+    array( 'label' => 'Trang Chủ',  'url' => '#home'     ),
+    array( 'label' => 'Quyền Lợi', 'url' => '#benefits' ),
+    array( 'label' => 'Sản Phẩm',  'url' => '#pricing'  ),
+);
 $al_nav_cta_text       = al_field( 'al_nav_cta_text' )       ?: 'ĐĂNG KÝ';
 $al_nav_cta_phone      = al_field( 'al_nav_cta_phone' );
 
@@ -42,12 +46,8 @@ $al_hero_cta_sec       = al_field( 'al_hero_cta_secondary_text' );
 $al_hero_cta_sec_url   = al_field( 'al_hero_cta_secondary_url' ) ?: '#';
 $al_hero_image         = al_field( 'al_hero_image' );
 
-$al_feature_title      = al_field( 'al_feature_title' )      ?: 'LẦN ĐẦU TIÊN RA MẮT';
-$al_feature_subtitle   = al_field( 'al_feature_subtitle' )   ?: 'BẢO HIỂM RỦI RO KHÔNG GIAN MẠNG TẠI VIỆT NAM';
+$al_feature_bg_image   = al_field( 'al_feature_bg_image' );
 $al_feature_video      = al_field( 'al_feature_video_url' );
-$al_feature_thumb      = al_field( 'al_feature_thumbnail' );
-$al_feature_badge_num  = al_field( 'al_feature_badge_number' ) ?: '30%';
-$al_feature_badge_lbl  = al_field( 'al_feature_badge_label' )  ?: 'PHÍ BẢO HIỂM';
 
 $al_benefits_pretitle  = al_field( 'al_benefits_pretitle' )  ?: 'FLASH ROSTASH';
 $al_benefits_title     = al_field( 'al_benefits_title' )     ?: 'BẢO VỆ BẠN TRƯỚC NHỮNG RỦI RO NÀO TRÊN KHÔNG GIAN MẠNG?';
@@ -97,17 +97,35 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         --al-radius:     12px;
         --al-shadow:     0 4px 24px rgba(0,0,0,.14);
         --al-font:       'Segoe UI', 'Be Vietnam Pro', Arial, sans-serif;
+        /* CTA gradient shared vars */
+        --al-cta-grad-start: rgba(255,179,55,1.0);
+        --al-cta-grad-end:   rgba(239,80,1,1.0);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
     body.al-landing {
         font-family: var(--al-font);
         background: #fff;
-        color: #333;
+        color: rgb(228, 228, 228);
         overflow-x: hidden;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.6;
     }
     body.al-landing img { max-width: 100%; height: auto; display: block; }
     body.al-landing a { text-decoration: none; color: inherit; }
+
+    /* ── GLOBAL BODY TEXT ────────────────────────────────────────── */
+    body.al-landing p,
+    body.al-landing li,
+    body.al-landing span,
+    body.al-landing div {
+        color: rgb(228, 228, 228);
+        font-weight: 400;
+        font-size: 14px;
+        text-align: justify;
+        line-height: 1.6;
+    }
 
     /* ── NAV ─────────────────────────────────────────────────────── */
     .al-nav {
@@ -164,14 +182,17 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         70%  { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255,179,55,0); }
         100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,179,55,0); }
     }
-    .al-nav__phone {
-        display: inline-block;
-        padding: 8px 18px;
-        border-radius: 6px;
-        color: #fff;
-        font-weight: 700;
-        font-size: 15px;
-        white-space: nowrap;
+    /* ── SHARED CTA GRADIENT + PULSE (applied to all CTA buttons) ── */
+    .al-cta-shared,
+    .al-nav__phone,
+    .al-btn--orange,
+    .al-btn--hero.al-btn--orange,
+    .al-plan__cta,
+    .al-plan--featured .al-plan__cta,
+    .al-benefit-card__cta,
+    .al-form-box .wpcf7-form input[type="submit"],
+    .al-form-box .wpcf7-form .wpcf7-submit,
+    .al-form-box__submit-btn {
         background: rgba(255,179,55,1.0);
         background: -webkit-linear-gradient(180deg, rgba(255,179,55,1.0), rgba(239,80,1,1.0));
         background: linear-gradient(180deg, rgba(255,179,55,1.0), rgba(239,80,1,1.0));
@@ -183,6 +204,15 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         animation-duration: 1s;
         -webkit-animation-iteration-count: infinite;
         animation-iteration-count: infinite;
+    }
+    .al-nav__phone {
+        display: inline-block;
+        padding: 8px 18px;
+        border-radius: 6px;
+        color: #fff;
+        font-weight: 700;
+        font-size: 15px;
+        white-space: nowrap;
     }
     .al-btn {
         display: inline-block;
@@ -198,13 +228,14 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     }
     .al-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
     .al-btn--orange {
-        background: var(--al-orange);
         color: var(--al-white);
     }
     .al-btn--outline {
         background: transparent;
         color: var(--al-orange-lt);
         border: 2px solid var(--al-orange);
+        animation: none !important;
+        -webkit-animation: none !important;
     }
     .al-nav__toggle {
         display: none;
@@ -293,74 +324,40 @@ $footer_logo = $al_footer_logo ?: $al_logo;
 
     /* ── FEATURE / VIDEO ─────────────────────────────────────────── */
     .al-feature {
-        background: var(--al-dark-2);
-        padding: 60px 0;
+        background-color: var(--al-dark-2);
+        background-size: cover;
+        background-position: center right;
+        background-repeat: no-repeat;
+        padding: 48px 0;
+        position: relative;
     }
     .al-feature__inner {
         max-width: 1100px;
         margin: 0 auto;
         padding: 0 20px;
         display: grid;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr 1fr;
         gap: 40px;
         align-items: center;
     }
+    /* Yellow-bordered video container matching mockup */
     .al-feature__media {
         position: relative;
-        border-radius: var(--al-radius);
+        border: 3px solid #f5c518;
+        border-radius: 14px;
         overflow: hidden;
         background: #000;
         aspect-ratio: 16/9;
+        box-shadow: 0 0 28px rgba(245, 197, 24, 0.35);
     }
-    .al-feature__media iframe,
-    .al-feature__media img {
+    .al-feature__media iframe {
         width: 100%;
         height: 100%;
-        object-fit: cover;
         display: block;
         border: 0;
     }
-    .al-feature__text { padding: 10px 0; }
-    .al-feature__label {
-        color: var(--al-orange-lt);
-        font-size: .8rem;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-    }
-    .al-feature__title {
-        color: var(--al-white);
-        font-size: 1.5rem;
-        font-weight: 900;
-        text-transform: uppercase;
-        line-height: 1.3;
-    }
-    .al-feature__badge {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: var(--al-orange);
-        color: var(--al-white);
-        border-radius: 50%;
-        width: 110px;
-        height: 110px;
-        flex-shrink: 0;
-        text-align: center;
-        box-shadow: 0 4px 20px rgba(230,146,10,.5);
-    }
-    .al-feature__badge-num {
-        font-size: 2rem;
-        font-weight: 900;
-        line-height: 1;
-    }
-    .al-feature__badge-lbl {
-        font-size: .65rem;
-        font-weight: 700;
-        letter-spacing: .5px;
-        line-height: 1.2;
-    }
+    /* Right column: empty — background image supplies the content */
+    .al-feature__right { }
 
     /* ── BENEFITS ────────────────────────────────────────────────── */
     .al-benefits {
@@ -384,11 +381,35 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         text-transform: uppercase;
         margin-bottom: 8px;
     }
-    .al-section-title {
-        font-size: clamp(1.3rem, 2.5vw, 1.9rem);
-        font-weight: 800;
-        color: #1a1a1a;
-        line-height: 1.3;
+    /* ── HEADLINE STYLE (Section Titles) ─────────────────────────── */
+    .al-section-title,
+    h2.al-section-title,
+    h3.al-section-title {
+        font-size: 35px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 1.2;
+        background: rgba(77, 44, 25, 1.0);
+        background: -webkit-linear-gradient(183deg, rgba(77, 44, 25, 1.0), rgba(148, 65, 13, 1.0));
+        background: linear-gradient(183deg, rgba(77, 44, 25, 1.0), rgba(148, 65, 13, 1.0));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: rgb(77, 44, 25);
+        margin-bottom: 14px;
+        display: block;
+    }
+    /* ── DIVIDER BELOW HEADLINES ──────────────────────────────────── */
+    .al-section-divider {
+        display: block;
+        width: 60%;
+        margin: 0 auto 36px;
+        border: 0;
+        border-top: 2px solid rgb(207, 207, 207);
+        border-right: 2px solid rgb(207, 207, 207);
+        border-bottom: 2px solid rgb(207, 207, 207);
+        border-left: 0 !important;
+        border-radius: 0 3px 3px 0;
     }
     .al-benefits__grid {
         display: grid;
@@ -431,16 +452,16 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     .al-benefit-card__cta {
         display: inline-block;
         margin-top: 18px;
-        background: var(--al-dark);
         color: var(--al-white);
-        padding: 9px 18px;
-        border-radius: 6px;
+        -webkit-text-fill-color: var(--al-white);
+        padding: 9px 22px;
+        border-radius: 30px;
         font-size: .82rem;
         font-weight: 700;
         letter-spacing: .5px;
-        transition: background .2s;
+        transition: filter .2s, transform .15s;
     }
-    .al-benefit-card__cta:hover { background: var(--al-orange); }
+    .al-benefit-card__cta:hover { filter: brightness(1.12); transform: translateY(-1px); }
 
     /* ── PRICING ─────────────────────────────────────────────────── */
     .al-pricing {
@@ -523,17 +544,16 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     .al-plan__cta {
         display: block;
         text-align: center;
-        background: var(--al-dark);
         color: var(--al-white);
+        -webkit-text-fill-color: var(--al-white);
         padding: 12px;
-        border-radius: 7px;
+        border-radius: 30px;
         font-weight: 700;
         font-size: .9rem;
         letter-spacing: .5px;
-        transition: background .2s;
+        transition: filter .2s, transform .15s;
     }
-    .al-plan--featured .al-plan__cta { background: var(--al-orange); }
-    .al-plan__cta:hover { background: var(--al-gold) !important; }
+    .al-plan__cta:hover { filter: brightness(1.12); transform: translateY(-1px); }
 
     /* ── ADVANTAGES + FORM ───────────────────────────────────────── */
     .al-adv {
@@ -583,27 +603,50 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         filter: drop-shadow(0 6px 20px rgba(230,146,10,.25));
     }
     .al-adv__right { }
+    /* ── FORM BOX ────────────────────────────────────────────────── */
     .al-form-box {
-        background: var(--al-white);
+        background: linear-gradient(160deg, #2a1000 0%, #3d1a00 50%, #4d2c19 100%);
         border-radius: var(--al-radius);
-        padding: 32px 28px;
-        box-shadow: 0 8px 40px rgba(0,0,0,.3);
+        padding: 36px 32px;
+        box-shadow: 0 8px 40px rgba(0,0,0,.5);
+        border: 1px solid rgba(148,65,13,.4);
     }
     .al-form-box__title {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #1a1a1a;
+        font-size: 2rem;
+        font-weight: 900;
         text-align: center;
-        margin-bottom: 4px;
+        margin-bottom: 6px;
         text-transform: uppercase;
+        line-height: 1.2;
+        background: rgba(77, 44, 25, 1.0);
+        background: -webkit-linear-gradient(183deg, rgba(255,179,55,1.0), rgba(239,80,1,1.0));
+        background: linear-gradient(183deg, rgba(255,179,55,1.0), rgba(239,80,1,1.0));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: rgba(255,179,55,1.0);
+        display: block;
     }
     .al-form-box__subtitle {
-        color: var(--al-orange);
-        font-size: 1rem;
-        font-weight: 800;
+        color: rgb(228, 228, 228);
+        font-size: .95rem;
+        font-weight: 600;
         text-align: center;
         text-transform: uppercase;
-        margin-bottom: 22px;
+        margin-bottom: 0;
+        letter-spacing: .5px;
+        -webkit-text-fill-color: rgb(228, 228, 228);
+    }
+    .al-form-box__divider {
+        display: block;
+        width: 50%;
+        margin: 14px auto 22px;
+        border: 0;
+        border-top: 2px solid rgb(207, 207, 207);
+        border-right: 2px solid rgb(207, 207, 207);
+        border-bottom: 2px solid rgb(207, 207, 207);
+        border-left: 0 !important;
+        border-radius: 0 3px 3px 0;
     }
     /* CF7 form overrides */
     .al-form-box .wpcf7-form .wpcf7-form-control-wrap,
@@ -611,50 +654,68 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     .al-form-box .wpcf7-form input[type="text"],
     .al-form-box .wpcf7-form input[type="email"],
     .al-form-box .wpcf7-form input[type="tel"],
-    .al-form-box .wpcf7-form textarea {
+    .al-form-box .wpcf7-form textarea,
+    .al-form-box .al-form-field {
         width: 100%;
-        padding: 11px 14px;
-        border: 1px solid #ddd;
+        padding: 13px 16px;
+        border: 1.5px solid rgba(207,167,120,.5);
         border-radius: 6px;
         font-size: .93rem;
         font-family: var(--al-font);
-        transition: border-color .2s;
+        transition: border-color .2s, box-shadow .2s;
+        background: rgba(255,255,255,.07);
+        color: rgb(228, 228, 228);
+        -webkit-text-fill-color: rgb(228, 228, 228);
+    }
+    .al-form-box .wpcf7-form input[type="text"]::placeholder,
+    .al-form-box .wpcf7-form input[type="email"]::placeholder,
+    .al-form-box .wpcf7-form input[type="tel"]::placeholder,
+    .al-form-box .al-form-field::placeholder {
+        color: rgba(228,228,228,.55);
     }
     .al-form-box .wpcf7-form input:focus,
-    .al-form-box .wpcf7-form textarea:focus {
+    .al-form-box .wpcf7-form textarea:focus,
+    .al-form-box .al-form-field:focus {
         outline: none;
-        border-color: var(--al-orange);
+        border-color: var(--al-orange-lt);
+        box-shadow: 0 0 0 3px rgba(255,179,55,.15);
+        background: rgba(255,255,255,.11);
     }
     .al-form-box .wpcf7-form input[type="submit"],
-    .al-form-box .wpcf7-form .wpcf7-submit {
+    .al-form-box .wpcf7-form .wpcf7-submit,
+    .al-form-box__submit-btn {
         width: 100%;
-        background: var(--al-orange);
         color: var(--al-white);
         border: none;
-        padding: 14px;
-        border-radius: 7px;
-        font-size: 1rem;
-        font-weight: 700;
+        padding: 15px;
+        border-radius: 30px;
+        font-size: 1.05rem;
+        font-weight: 800;
         cursor: pointer;
-        letter-spacing: .5px;
-        transition: background .2s, transform .15s;
+        letter-spacing: 1px;
         text-transform: uppercase;
+        display: block;
+        -webkit-text-fill-color: var(--al-white);
     }
     .al-form-box .wpcf7-form input[type="submit"]:hover,
-    .al-form-box .wpcf7-form .wpcf7-submit:hover {
-        background: var(--al-gold);
+    .al-form-box .wpcf7-form .wpcf7-submit:hover,
+    .al-form-box__submit-btn:hover {
+        filter: brightness(1.12);
         transform: translateY(-1px);
     }
     .al-form-box__hotline {
         text-align: center;
-        margin-top: 16px;
-        color: #555;
-        font-size: .88rem;
+        margin-top: 18px;
+        font-size: .9rem;
+        -webkit-text-fill-color: rgb(228, 228, 228);
     }
     .al-form-box__hotline a {
-        color: var(--al-orange);
-        font-weight: 700;
-        font-size: 1.1rem;
+        color: var(--al-orange-lt);
+        font-weight: 800;
+        font-size: 1.3rem;
+        display: block;
+        margin-top: 4px;
+        -webkit-text-fill-color: var(--al-orange-lt);
     }
 
     /* ── FOOTER ──────────────────────────────────────────────────── */
@@ -740,8 +801,8 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         .al-plan--featured { transform: none; }
         .al-adv__inner { grid-template-columns: 1fr; gap: 36px; }
         .al-adv__image { text-align: center; }
-        .al-feature__inner { grid-template-columns: 1fr; }
-        .al-feature__badge { margin: 0 auto 20px; }
+        .al-feature__inner { grid-template-columns: 1fr; gap: 0; }
+        .al-feature__right { display: none; }
     }
     @media (max-width: 767px) {
         .al-nav__links { display: none; }
@@ -820,7 +881,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
 <!-- ══════════════════════════════════════════════════════════════════
      2. HERO
 ══════════════════════════════════════════════════════════════════ -->
-<section class="al-hero" id="trang-chu">
+<section class="al-hero" id="home">
     <div class="al-hero__inner">
         <div class="al-hero__content">
             <?php if ( $al_hero_badge ) : ?>
@@ -859,39 +920,26 @@ $footer_logo = $al_footer_logo ?: $al_logo;
 <!-- ══════════════════════════════════════════════════════════════════
      3. FEATURE / VIDEO
 ══════════════════════════════════════════════════════════════════ -->
-<?php if ( $al_feature_video || $al_feature_thumb ) : ?>
-<section class="al-feature" id="gioi-thieu">
+<?php if ( $al_feature_video ) : ?>
+<?php
+    $feature_bg_style = '';
+    if ( $al_feature_bg_image && ! empty( $al_feature_bg_image['url'] ) ) {
+        $feature_bg_style = ' style="background-image:url(' . esc_url( $al_feature_bg_image['url'] ) . ');"';
+    }
+?>
+<section class="al-feature" id="gioi-thieu"<?php echo $feature_bg_style; ?>>
     <div class="al-feature__inner">
 
+        <!-- LEFT: YouTube embed with yellow border -->
         <div class="al-feature__media">
-            <?php if ( $al_feature_video ) : ?>
-                <iframe src="<?php echo esc_url( $al_feature_video ); ?>"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                        title="<?php echo esc_attr( $al_feature_subtitle ); ?>"></iframe>
-            <?php elseif ( $al_feature_thumb ) : ?>
-                <img src="<?php echo esc_url( $al_feature_thumb['url'] ); ?>"
-                     alt="<?php echo esc_attr( $al_feature_thumb['alt'] ?: $al_feature_subtitle ); ?>">
-            <?php endif; ?>
+            <iframe src="<?php echo esc_url( $al_feature_video ); ?>"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    title="Video giới thiệu"></iframe>
         </div>
 
-        <div class="al-feature__right">
-            <?php if ( $al_feature_badge_num ) : ?>
-            <div class="al-feature__badge" style="margin-bottom:20px;">
-                <span class="al-feature__badge-num"><?php echo esc_html( $al_feature_badge_num ); ?></span>
-                <?php if ( $al_feature_badge_lbl ) : ?>
-                <span class="al-feature__badge-lbl"><?php echo esc_html( $al_feature_badge_lbl ); ?></span>
-                <?php endif; ?>
-            </div>
-            <?php endif; ?>
-
-            <?php if ( $al_feature_title ) : ?>
-                <p class="al-feature__label"><?php echo esc_html( $al_feature_title ); ?></p>
-            <?php endif; ?>
-            <?php if ( $al_feature_subtitle ) : ?>
-                <h2 class="al-feature__title"><?php echo esc_html( $al_feature_subtitle ); ?></h2>
-            <?php endif; ?>
-        </div>
+        <!-- RIGHT: Background image carries the visual content -->
+        <div class="al-feature__right"></div>
 
     </div>
 </section>
@@ -902,13 +950,14 @@ $footer_logo = $al_footer_logo ?: $al_logo;
      4. BENEFITS
 ══════════════════════════════════════════════════════════════════ -->
 <?php if ( $al_benefits_items ) : ?>
-<section class="al-benefits" id="quyen-loi">
+<section class="al-benefits" id="benefits">
     <div class="al-section-inner">
         <div class="al-section-head">
             <?php if ( $al_benefits_pretitle ) : ?>
                 <p class="al-section-pretitle"><?php echo esc_html( $al_benefits_pretitle ); ?></p>
             <?php endif; ?>
             <h2 class="al-section-title"><?php echo esc_html( $al_benefits_title ); ?></h2>
+            <hr class="al-section-divider">
         </div>
 
         <div class="al-benefits__grid">
@@ -940,10 +989,11 @@ $footer_logo = $al_footer_logo ?: $al_logo;
      5. PRICING
 ══════════════════════════════════════════════════════════════════ -->
 <?php if ( $al_pricing_plans ) : ?>
-<section class="al-pricing" id="san-pham">
+<section class="al-pricing" id="pricing">
     <div class="al-section-inner">
         <div class="al-section-head">
             <h2 class="al-section-title"><?php echo esc_html( $al_pricing_title ); ?></h2>
+            <hr class="al-section-divider">
         </div>
 
         <div class="al-pricing__grid">
@@ -1019,34 +1069,32 @@ $footer_logo = $al_footer_logo ?: $al_logo;
             <div class="al-form-box">
                 <h3 class="al-form-box__title"><?php echo esc_html( $al_form_title ); ?></h3>
                 <p class="al-form-box__subtitle"><?php echo esc_html( $al_form_subtitle ); ?></p>
+                <hr class="al-form-box__divider">
 
                 <?php if ( $al_form_shortcode ) : ?>
                     <?php echo do_shortcode( wp_kses_post( $al_form_shortcode ) ); ?>
                 <?php else : ?>
                     <!-- Default form (shown when no CF7 shortcode is set) -->
-                    <form class="wpcf7-form" method="post" action="#dang-ky" novalidate>
+                    <form class="wpcf7-form al-default-form" method="post" action="#dang-ky" novalidate>
                         <p>
-                            <input type="text" name="al_name" placeholder="Họ và tên *" required>
+                            <input class="al-form-field" type="text" name="al_name" placeholder="Họ và tên" required>
                         </p>
                         <p>
-                            <input type="email" name="al_email" placeholder="Địa chỉ email *" required>
+                            <input class="al-form-field" type="email" name="al_email" placeholder="Email" required>
                         </p>
                         <p>
-                            <input type="tel" name="al_phone" placeholder="Số điện thoại *" required>
+                            <input class="al-form-field" type="tel" name="al_phone" placeholder="Số điện thoại" required>
                         </p>
                         <p>
-                            <input type="submit" value="ĐĂNG KÝ TƯ VẤN MIỄN PHÍ">
-                        </p>
-                        <p style="font-size:.78rem;color:#888;text-align:center;">
-                            ← Vui lòng thêm Contact Form 7 shortcode qua ACF để kích hoạt form đầy đủ.
+                            <button type="submit" class="al-form-box__submit-btn">ĐĂNG KÝ</button>
                         </p>
                     </form>
                 <?php endif; ?>
 
                 <?php if ( $al_hotline ) : ?>
                 <div class="al-form-box__hotline">
-                    Hoặc gọi miễn phí:
-                    <br><a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $al_hotline ) ); ?>">
+                    Hoặc gọi tới Hotline
+                    <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $al_hotline ) ); ?>">
                         <?php echo esc_html( $al_hotline ); ?>
                     </a>
                 </div>
