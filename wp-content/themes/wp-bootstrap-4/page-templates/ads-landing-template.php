@@ -29,7 +29,11 @@ function al_field( $name ) {
 
 // Pre-fetch all ACF fields for this page
 $al_logo               = al_field( 'al_logo' );
-$al_nav_links          = al_field( 'al_nav_links' );
+$al_nav_links          = al_field( 'al_nav_links' ) ?: array(
+    array( 'label' => 'Trang Chủ',  'url' => '#home'     ),
+    array( 'label' => 'Quyền Lợi', 'url' => '#benefits' ),
+    array( 'label' => 'Sản Phẩm',  'url' => '#pricing'  ),
+);
 $al_nav_cta_text       = al_field( 'al_nav_cta_text' )       ?: 'ĐĂNG KÝ';
 $al_nav_cta_phone      = al_field( 'al_nav_cta_phone' );
 
@@ -42,12 +46,8 @@ $al_hero_cta_sec       = al_field( 'al_hero_cta_secondary_text' );
 $al_hero_cta_sec_url   = al_field( 'al_hero_cta_secondary_url' ) ?: '#';
 $al_hero_image         = al_field( 'al_hero_image' );
 
-$al_feature_title      = al_field( 'al_feature_title' )      ?: 'LẦN ĐẦU TIÊN RA MẮT';
-$al_feature_subtitle   = al_field( 'al_feature_subtitle' )   ?: 'BẢO HIỂM RỦI RO KHÔNG GIAN MẠNG TẠI VIỆT NAM';
+$al_feature_bg_image   = al_field( 'al_feature_bg_image' );
 $al_feature_video      = al_field( 'al_feature_video_url' );
-$al_feature_thumb      = al_field( 'al_feature_thumbnail' );
-$al_feature_badge_num  = al_field( 'al_feature_badge_number' ) ?: '30%';
-$al_feature_badge_lbl  = al_field( 'al_feature_badge_label' )  ?: 'PHÍ BẢO HIỂM';
 
 $al_benefits_pretitle  = al_field( 'al_benefits_pretitle' )  ?: 'FLASH ROSTASH';
 $al_benefits_title     = al_field( 'al_benefits_title' )     ?: 'BẢO VỆ BẠN TRƯỚC NHỮNG RỦI RO NÀO TRÊN KHÔNG GIAN MẠNG?';
@@ -102,7 +102,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         --al-cta-grad-end:   rgba(239,80,1,1.0);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
     body.al-landing {
         font-family: var(--al-font);
         background: #fff;
@@ -324,74 +324,40 @@ $footer_logo = $al_footer_logo ?: $al_logo;
 
     /* ── FEATURE / VIDEO ─────────────────────────────────────────── */
     .al-feature {
-        background: var(--al-dark-2);
-        padding: 60px 0;
+        background-color: var(--al-dark-2);
+        background-size: cover;
+        background-position: center right;
+        background-repeat: no-repeat;
+        padding: 48px 0;
+        position: relative;
     }
     .al-feature__inner {
         max-width: 1100px;
         margin: 0 auto;
         padding: 0 20px;
         display: grid;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr 1fr;
         gap: 40px;
         align-items: center;
     }
+    /* Yellow-bordered video container matching mockup */
     .al-feature__media {
         position: relative;
-        border-radius: var(--al-radius);
+        border: 3px solid #f5c518;
+        border-radius: 14px;
         overflow: hidden;
         background: #000;
         aspect-ratio: 16/9;
+        box-shadow: 0 0 28px rgba(245, 197, 24, 0.35);
     }
-    .al-feature__media iframe,
-    .al-feature__media img {
+    .al-feature__media iframe {
         width: 100%;
         height: 100%;
-        object-fit: cover;
         display: block;
         border: 0;
     }
-    .al-feature__text { padding: 10px 0; }
-    .al-feature__label {
-        color: var(--al-orange-lt);
-        font-size: .8rem;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-    }
-    .al-feature__title {
-        color: var(--al-white);
-        font-size: 1.5rem;
-        font-weight: 900;
-        text-transform: uppercase;
-        line-height: 1.3;
-    }
-    .al-feature__badge {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: var(--al-orange);
-        color: var(--al-white);
-        border-radius: 50%;
-        width: 110px;
-        height: 110px;
-        flex-shrink: 0;
-        text-align: center;
-        box-shadow: 0 4px 20px rgba(230,146,10,.5);
-    }
-    .al-feature__badge-num {
-        font-size: 2rem;
-        font-weight: 900;
-        line-height: 1;
-    }
-    .al-feature__badge-lbl {
-        font-size: .65rem;
-        font-weight: 700;
-        letter-spacing: .5px;
-        line-height: 1.2;
-    }
+    /* Right column: empty — background image supplies the content */
+    .al-feature__right { }
 
     /* ── BENEFITS ────────────────────────────────────────────────── */
     .al-benefits {
@@ -835,8 +801,8 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         .al-plan--featured { transform: none; }
         .al-adv__inner { grid-template-columns: 1fr; gap: 36px; }
         .al-adv__image { text-align: center; }
-        .al-feature__inner { grid-template-columns: 1fr; }
-        .al-feature__badge { margin: 0 auto 20px; }
+        .al-feature__inner { grid-template-columns: 1fr; gap: 0; }
+        .al-feature__right { display: none; }
     }
     @media (max-width: 767px) {
         .al-nav__links { display: none; }
@@ -915,7 +881,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
 <!-- ══════════════════════════════════════════════════════════════════
      2. HERO
 ══════════════════════════════════════════════════════════════════ -->
-<section class="al-hero" id="trang-chu">
+<section class="al-hero" id="home">
     <div class="al-hero__inner">
         <div class="al-hero__content">
             <?php if ( $al_hero_badge ) : ?>
@@ -954,39 +920,26 @@ $footer_logo = $al_footer_logo ?: $al_logo;
 <!-- ══════════════════════════════════════════════════════════════════
      3. FEATURE / VIDEO
 ══════════════════════════════════════════════════════════════════ -->
-<?php if ( $al_feature_video || $al_feature_thumb ) : ?>
-<section class="al-feature" id="gioi-thieu">
+<?php if ( $al_feature_video ) : ?>
+<?php
+    $feature_bg_style = '';
+    if ( $al_feature_bg_image && ! empty( $al_feature_bg_image['url'] ) ) {
+        $feature_bg_style = ' style="background-image:url(' . esc_url( $al_feature_bg_image['url'] ) . ');"';
+    }
+?>
+<section class="al-feature" id="gioi-thieu"<?php echo $feature_bg_style; ?>>
     <div class="al-feature__inner">
 
+        <!-- LEFT: YouTube embed with yellow border -->
         <div class="al-feature__media">
-            <?php if ( $al_feature_video ) : ?>
-                <iframe src="<?php echo esc_url( $al_feature_video ); ?>"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                        title="<?php echo esc_attr( $al_feature_subtitle ); ?>"></iframe>
-            <?php elseif ( $al_feature_thumb ) : ?>
-                <img src="<?php echo esc_url( $al_feature_thumb['url'] ); ?>"
-                     alt="<?php echo esc_attr( $al_feature_thumb['alt'] ?: $al_feature_subtitle ); ?>">
-            <?php endif; ?>
+            <iframe src="<?php echo esc_url( $al_feature_video ); ?>"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    title="Video giới thiệu"></iframe>
         </div>
 
-        <div class="al-feature__right">
-            <?php if ( $al_feature_badge_num ) : ?>
-            <div class="al-feature__badge" style="margin-bottom:20px;">
-                <span class="al-feature__badge-num"><?php echo esc_html( $al_feature_badge_num ); ?></span>
-                <?php if ( $al_feature_badge_lbl ) : ?>
-                <span class="al-feature__badge-lbl"><?php echo esc_html( $al_feature_badge_lbl ); ?></span>
-                <?php endif; ?>
-            </div>
-            <?php endif; ?>
-
-            <?php if ( $al_feature_title ) : ?>
-                <p class="al-feature__label"><?php echo esc_html( $al_feature_title ); ?></p>
-            <?php endif; ?>
-            <?php if ( $al_feature_subtitle ) : ?>
-                <h2 class="al-feature__title"><?php echo esc_html( $al_feature_subtitle ); ?></h2>
-            <?php endif; ?>
-        </div>
+        <!-- RIGHT: Background image carries the visual content -->
+        <div class="al-feature__right"></div>
 
     </div>
 </section>
@@ -997,7 +950,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
      4. BENEFITS
 ══════════════════════════════════════════════════════════════════ -->
 <?php if ( $al_benefits_items ) : ?>
-<section class="al-benefits" id="quyen-loi">
+<section class="al-benefits" id="benefits">
     <div class="al-section-inner">
         <div class="al-section-head">
             <?php if ( $al_benefits_pretitle ) : ?>
@@ -1036,7 +989,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
      5. PRICING
 ══════════════════════════════════════════════════════════════════ -->
 <?php if ( $al_pricing_plans ) : ?>
-<section class="al-pricing" id="san-pham">
+<section class="al-pricing" id="pricing">
     <div class="al-section-inner">
         <div class="al-section-head">
             <h2 class="al-section-title"><?php echo esc_html( $al_pricing_title ); ?></h2>

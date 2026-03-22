@@ -38,10 +38,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
          'al_hero_cta_primary_text' => 'MUA NGAY',
          'al_hero_cta_primary_url' => '#dang-ky',
 
-         'al_feature_title' => 'LẦN ĐẦU TIÊN RA MẮT',
-         'al_feature_subtitle' => 'BẢO HIỂM RỦI RO KHÔNG GIAN MẠNG TẠI VIỆT NAM',
-         'al_feature_badge_number' => '30%',
-         'al_feature_badge_label' => 'PHÍ BẢO HIỂM',
+         'al_feature_video_url' => 'https://www.youtube.com/embed/VqTKS5i9OYM?si=MIjp2tb1uGcUh5aL',
 
          'al_benefits_pretitle' => 'FLASH ROSTASH',
          'al_benefits_title' => 'BẢO VỆ BẠN TRƯỚC NHỮNG RỦI RO NÀO TRÊN KHÔNG GIAN MẠNG?',
