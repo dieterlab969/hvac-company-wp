@@ -66,17 +66,39 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
              ]
          ],
 
-         'al_pricing_title' => 'BACKLIDES VÀ CÁC LỰA CHỌN',
+         'al_pricing_title'         => 'BACLKDES VÀ CÁC LỰA CHỌN',
+         'al_pricing_coverage_label'=> 'QUYỀN LỢI BẢO VỆ LÊN ĐẾN',
          'al_pricing_plans' => [
              [
-                 'featured' => 1,
-                 'plan_label' => 'QUYỀN LỢI 0 + C + R + I',
-                 'coverage' => '15.000 USD',
-                 'price_original' => '1.300.000 VND',
-                 'price_sale' => '830.000 VND',
+                 'coverage'       => '15.000 USD',
+                 'benefits_label' => 'QUYỀN LỢI U + O + C + R + I',
+                 'pricing_rows'   => [
+                     ['size_label' => 'Size M',  'coverage_detail' => '1.500 USD/1 OL', 'price' => '830.000 VNĐ'],
+                     ['size_label' => 'Size XL', 'coverage_detail' => '3000 USD/1 OL',  'price' => '1.300.000 VNĐ'],
+                 ],
                  'cta_text' => 'MUA NGAY',
-                 'cta_url' => '#dang-ky'
-             ]
+                 'cta_url'  => '#dang-ky',
+             ],
+             [
+                 'coverage'       => '9.000 USD',
+                 'benefits_label' => 'QUYỀN LỢI U + O + C',
+                 'pricing_rows'   => [
+                     ['size_label' => 'Size M',  'coverage_detail' => '1.500 USD/1 OL', 'price' => '470.000 VNĐ'],
+                     ['size_label' => 'Size XL', 'coverage_detail' => '3000 USD/1 OL',  'price' => '700.000 VNĐ'],
+                 ],
+                 'cta_text' => 'MUA NGAY',
+                 'cta_url'  => '#dang-ky',
+             ],
+             [
+                 'coverage'       => '6.000 USD',
+                 'benefits_label' => 'QUYỀN LỢI U + O',
+                 'pricing_rows'   => [
+                     ['size_label' => 'Size M',  'coverage_detail' => '1.500 USD/1 OL', 'price' => '290.000 VNĐ'],
+                     ['size_label' => 'Size XL', 'coverage_detail' => '3000 USD/1 OL',  'price' => '400.000 VNĐ'],
+                 ],
+                 'cta_text' => 'MUA NGAY',
+                 'cta_url'  => '#dang-ky',
+             ],
          ],
 
          'al_adv_title' => "ƯU ĐIỂM CỦA\nBẢO HIỂM FASHRASK",
