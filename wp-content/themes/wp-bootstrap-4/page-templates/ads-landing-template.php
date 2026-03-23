@@ -411,50 +411,131 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         border-left: 0 !important;
         border-radius: 0 3px 3px 0;
     }
+    /* ── BENEFITS GRID ───────────────────────────────────────────── */
     .al-benefits__grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
+        gap: 28px;
     }
+
+    /* ── BENEFIT CARD ────────────────────────────────────────────── */
     .al-benefit-card {
-        background: var(--al-card-bg);
-        border: 1px solid #e8e0d0;
+        background: #ffffff;
+        border: 1px solid #e0d4c4;
         border-radius: var(--al-radius);
-        padding: 28px 22px;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         transition: box-shadow .25s, transform .25s;
+        position: relative;
     }
     .al-benefit-card:hover {
-        box-shadow: var(--al-shadow);
+        box-shadow: 0 8px 32px rgba(0,0,0,.12);
         transform: translateY(-4px);
     }
-    .al-benefit-card__icon {
-        width: 56px;
-        height: 56px;
-        object-fit: contain;
-        margin-bottom: 16px;
-    }
-    .al-benefit-card__title {
-        font-size: 1rem;
-        font-weight: 700;
-        color: #1a1a1a;
-        margin-bottom: 10px;
-        line-height: 1.35;
-        text-transform: uppercase;
-    }
-    .al-benefit-card__desc {
-        font-size: .88rem;
-        color: #555;
-        line-height: 1.65;
+
+    /* Body area (title + description + bg letter) */
+    .al-benefit-card__body {
+        padding: 28px 22px 56px;
+        position: relative;
         flex: 1;
+        overflow: hidden;
     }
+
+    /* Large decorative first-letter watermark */
+    .al-benefit-card__bg-letter {
+        position: absolute;
+        bottom: -10px;
+        right: 6px;
+        font-size: 110px;
+        font-weight: 900;
+        color: rgba(121, 72, 40, 0.07);
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
+        z-index: 0;
+        font-family: sans-serif;
+        letter-spacing: -5px;
+    }
+
+    /* Title */
+    .al-benefit-card__title {
+        font-family: sans-serif;
+        color: rgb(77, 44, 25);
+        font-size: 17px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 1.6;
+        margin-bottom: 14px;
+        position: relative;
+        z-index: 1;
+        -webkit-text-fill-color: rgb(77, 44, 25);
+    }
+
+    /* Description */
+    .al-benefit-card__desc {
+        font-family: "Open Sans", sans-serif;
+        color: rgb(0, 0, 0);
+        font-size: 15px;
+        text-align: justify;
+        line-height: 1.6;
+        position: relative;
+        z-index: 1;
+        -webkit-text-fill-color: rgb(0, 0, 0);
+    }
+
+    /* Bottom brown strip */
+    .al-benefit-card__bottom {
+        background-color: rgb(121, 72, 40);
+        text-align: center;
+        padding: 0 16px 20px;
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    /* Icon circle — sits on the dividing line between body and bottom */
+    .al-benefit-card__icon-wrap {
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 3px solid rgb(121, 72, 40);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: -37px auto 12px;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    }
+    .al-benefit-card__icon {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/u-20201125092056.png');
+    }
+
+    /* Label inside brown strip */
+    .al-benefit-card__label {
+        display: block;
+        color: #ffffff;
+        font-size: 14px;
+        text-align: center !important;
+        font-weight: bold !important;
+        line-height: 1.4;
+        -webkit-text-fill-color: #ffffff;
+    }
+
+    /* Optional CTA button (legacy, hidden by default if label present) */
     .al-benefit-card__cta {
         display: inline-block;
-        margin-top: 18px;
+        margin-top: 12px;
         color: var(--al-white);
         -webkit-text-fill-color: var(--al-white);
-        padding: 9px 22px;
+        padding: 8px 20px;
         border-radius: 30px;
         font-size: .82rem;
         font-weight: 700;
@@ -961,22 +1042,52 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         </div>
 
         <div class="al-benefits__grid">
-            <?php foreach ( $al_benefits_items as $item ) : ?>
+            <?php foreach ( $al_benefits_items as $item ) :
+                $card_title  = ! empty( $item['title'] )       ? $item['title']       : '';
+                $card_desc   = ! empty( $item['description'] ) ? $item['description'] : '';
+                $card_label  = ! empty( $item['label'] )       ? $item['label']       : '';
+                $card_icon   = ! empty( $item['icon'] )        ? $item['icon']        : null;
+                $card_cta    = ! empty( $item['cta_text'] )    ? $item['cta_text']    : '';
+                $card_cta_url = ! empty( $item['cta_url'] )   ? $item['cta_url']     : '#dang-ky';
+                // Extract first letter from label (fallback to title) for bg watermark
+                $bg_src  = $card_label ?: $card_title;
+                $bg_letter = $bg_src ? mb_strtoupper( mb_substr( $bg_src, 0, 1, 'UTF-8' ), 'UTF-8' ) : '';
+            ?>
             <div class="al-benefit-card">
-                <?php if ( ! empty( $item['icon'] ) ) : ?>
-                    <img class="al-benefit-card__icon"
-                         src="<?php echo esc_url( $item['icon']['url'] ); ?>"
-                         alt="<?php echo esc_attr( $item['icon']['alt'] ?: $item['title'] ); ?>"
-                         loading="lazy">
-                <?php endif; ?>
-                <h3 class="al-benefit-card__title"><?php echo esc_html( $item['title'] ); ?></h3>
-                <p class="al-benefit-card__desc"><?php echo esc_html( $item['description'] ); ?></p>
-                <?php if ( ! empty( $item['cta_text'] ) ) : ?>
-                    <a href="<?php echo esc_url( $item['cta_url'] ?: '#dang-ky' ); ?>"
-                       class="al-benefit-card__cta">
-                        <?php echo esc_html( $item['cta_text'] ); ?>
-                    </a>
-                <?php endif; ?>
+
+                <!-- ── Card body: title + description + bg letter ── -->
+                <div class="al-benefit-card__body">
+                    <?php if ( $bg_letter ) : ?>
+                        <span class="al-benefit-card__bg-letter" aria-hidden="true"><?php echo esc_html( $bg_letter ); ?></span>
+                    <?php endif; ?>
+
+                    <h3 class="al-benefit-card__title"><?php echo esc_html( $card_title ); ?></h3>
+                    <?php if ( $card_desc ) : ?>
+                        <p class="al-benefit-card__desc"><?php echo esc_html( $card_desc ); ?></p>
+                    <?php endif; ?>
+                </div>
+
+                <!-- ── Card bottom: brown strip with overlapping icon ── -->
+                <div class="al-benefit-card__bottom">
+                    <?php if ( $card_icon ) : ?>
+                    <div class="al-benefit-card__icon-wrap">
+                        <div class="al-benefit-card__icon" style="
+                                background-image: url('<?php echo $card_icon['url'] ?? ''; ?>');
+                                background-size: cover;
+                                background-position: center;
+                                background-repeat: no-repeat;
+                                width: 100%;
+                                height: 100%;
+                                "></div>
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if ( $card_label ) : ?>
+                        <span class="al-benefit-card__label"><?php echo esc_html( $card_label ); ?></span>
+                    <?php endif; ?>
+
+                </div>
+
             </div>
             <?php endforeach; ?>
         </div>
@@ -1158,9 +1269,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
 
     </div>
 
-    <div class="al-footer__bottom">
-        <p>&copy; <?php echo date( 'Y' ); ?> <?php echo esc_html( $al_footer_company ); ?>. All rights reserved.</p>
-    </div>
+
 </footer>
 
 <?php wp_footer(); ?>

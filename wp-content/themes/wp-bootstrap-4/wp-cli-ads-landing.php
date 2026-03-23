@@ -45,13 +45,22 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
          'al_benefits_items' => [
              [
                  'title' => 'BẢO VỆ RỦI RO GIAO DỊCH TRỰC TUYẾN',
-                 'description' => 'Bồi thường khoản tiền bị mất trong tài khoản ngân hàng...',
+                 'description' => 'Bồi thường khoản tiền bị mất trong tài khoản ngân hàng của Người được bảo hiểm (NĐBH) bởi các nguyên nhân phát sinh từ rủi ro an ninh mạng (giao dịch giả mạo/ trái phép được thực hiện bởi người khác – không phải là NĐBH,...);',
+                 'label' => 'Unauthorised transaction',
                  'cta_text' => '',
                  'cta_url' => '#dang-ky'
              ],
              [
                  'title' => 'BẢO VỆ KHI GẶP PHẢI LỪA ĐẢO TRỰC TUYẾN',
-                 'description' => 'Bồi thường khoản tiền bị mất do lừa đảo...',
+                 'description' => 'Bồi thường khoản tiền bị mất do các hành vi lừa đảo trực tuyến như phishing, giả mạo danh tính, hoặc các chiêu trò gian lận qua mạng xã hội và email;',
+                 'label' => 'Online retail fraud',
+                 'cta_text' => '',
+                 'cta_url' => '#dang-ky'
+             ],
+             [
+                 'title' => 'BẢO VỆ TRƯỚC CÁC CUỘC TẤN CÔNG MẠNG',
+                 'description' => 'Hỗ trợ chi phí phục hồi dữ liệu và hệ thống sau các cuộc tấn công ransomware, malware hoặc các hình thức tống tiền qua mạng;',
+                 'label' => 'Cyber extortion',
                  'cta_text' => '',
                  'cta_url' => '#dang-ky'
              ]

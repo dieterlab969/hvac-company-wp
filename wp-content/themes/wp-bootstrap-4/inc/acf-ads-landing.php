@@ -210,6 +210,13 @@ acf_add_local_field_group( array(
                     'rows'  => 3,
                 ),
                 array(
+                    'key'          => 'field_al_benefit_label',
+                    'label'        => 'Bottom Label (e.g. "Unauthorised transaction")',
+                    'name'         => 'label',
+                    'type'         => 'text',
+                    'instructions' => 'Short label shown in the brown bottom strip of the card.',
+                ),
+                array(
                     'key'   => 'field_al_benefit_cta',
                     'label' => 'CTA Button Text (optional)',
                     'name'  => 'cta_text',
