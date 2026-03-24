@@ -610,6 +610,9 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         flex-shrink: 0;
         margin-top: 1px;
     }
+    .al-plan__pricing .al-plan__price-sale, .al-plan__features li {
+        color: #000 !important;
+    }
     .al-plan__pricing { margin-bottom: 18px; text-align: center; }
     .al-plan__price-original {
         font-size: .88rem;
@@ -798,6 +801,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         margin-top: 4px;
         -webkit-text-fill-color: var(--al-orange-lt);
     }
+
 
     /* ── FOOTER ──────────────────────────────────────────────────── */
     .al-footer {
