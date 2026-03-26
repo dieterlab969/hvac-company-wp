@@ -86,20 +86,27 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     <style>
     /* ── GLOBAL RESET & VARS ─────────────────────────────────────── */
     :root {
-        --al-dark:       #1a0900;
-        --al-dark-2:     #2d1400;
-        --al-orange:     #e6920a;
-        --al-orange-lt:  #f5a623;
-        --al-gold:       #c8860a;
+        --al-dark:       #0A4F8A;
+        --al-dark-2:     #083d6e;
+        --al-orange:     #0F7DBA;
+        --al-orange-lt:  #2EA3D0;
+        --al-gold:       #0A4F8A;
         --al-white:      #ffffff;
-        --al-text-muted: #c8b89a;
+        --al-text-muted: #b0cfe8;
         --al-card-bg:    #ffffff;
         --al-radius:     12px;
         --al-shadow:     0 4px 24px rgba(0,0,0,.14);
         --al-font:       'Segoe UI', 'Be Vietnam Pro', Arial, sans-serif;
-        /* CTA gradient shared vars */
-        --al-cta-grad-start: rgba(255,179,55,1.0);
-        --al-cta-grad-end:   rgba(239,80,1,1.0);
+        /* Design tokens */
+        --color-primary:       #0F7DBA;
+        --color-primary-light: #2EA3D0;
+        --color-primary-dark:  #0A4F8A;
+        --color-accent-red:    #E53935;
+        --color-text-main:     #333333;
+        --color-bg-light:      #F5F9FC;
+        /* CTA gradient — red for conversion focus */
+        --al-cta-grad-start: rgba(229,57,53,1.0);
+        --al-cta-grad-end:   rgba(183,28,28,1.0);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; scroll-padding-top: 70px; }
@@ -173,14 +180,14 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         gap: 14px;
     }
     @-webkit-keyframes pulse {
-        0%   { -webkit-transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,179,55,.6); }
-        70%  { -webkit-transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255,179,55,0); }
-        100% { -webkit-transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,179,55,0); }
+        0%   { -webkit-transform: scale(1);    box-shadow: 0 0 0 0 rgba(229,57,53,.6); }
+        70%  { -webkit-transform: scale(1.05); box-shadow: 0 0 0 10px rgba(229,57,53,0); }
+        100% { -webkit-transform: scale(1);    box-shadow: 0 0 0 0 rgba(229,57,53,0); }
     }
     @keyframes pulse {
-        0%   { transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,179,55,.6); }
-        70%  { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255,179,55,0); }
-        100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,179,55,0); }
+        0%   { transform: scale(1);    box-shadow: 0 0 0 0 rgba(229,57,53,.6); }
+        70%  { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(229,57,53,0); }
+        100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(229,57,53,0); }
     }
     /* ── SHARED CTA GRADIENT + PULSE (applied to all CTA buttons) ── */
     .al-cta-shared,
@@ -193,9 +200,9 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     .al-form-box .wpcf7-form input[type="submit"],
     .al-form-box .wpcf7-form .wpcf7-submit,
     .al-form-box__submit-btn {
-        background: rgba(255,179,55,1.0);
-        background: -webkit-linear-gradient(180deg, rgba(255,179,55,1.0), rgba(239,80,1,1.0));
-        background: linear-gradient(180deg, rgba(255,179,55,1.0), rgba(239,80,1,1.0));
+        background: var(--color-accent-red);
+        background: -webkit-linear-gradient(180deg, rgba(229,57,53,1.0), rgba(183,28,28,1.0));
+        background: linear-gradient(180deg, rgba(229,57,53,1.0), rgba(183,28,28,1.0));
         -webkit-animation-name: pulse;
         animation-name: pulse;
         -webkit-animation-delay: 1s;
@@ -232,8 +239,8 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     }
     .al-btn--outline {
         background: transparent;
-        color: var(--al-orange-lt);
-        border: 2px solid var(--al-orange);
+        color: var(--al-white);
+        border: 2px solid var(--al-orange-lt);
         animation: none !important;
         -webkit-animation: none !important;
     }
@@ -255,7 +262,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
 
     /* ── HERO ────────────────────────────────────────────────────── */
     .al-hero {
-        background: linear-gradient(135deg, var(--al-dark) 0%, #3d1800 60%, #1a0900 100%);
+        background: linear-gradient(135deg, var(--al-dark) 0%, #0d5fa0 60%, #0A4F8A 100%);
         min-height: 520px;
         display: flex;
         align-items: center;
@@ -267,7 +274,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         content: '';
         position: absolute;
         inset: 0;
-        background: radial-gradient(ellipse at 70% 50%, rgba(230,146,10,.18) 0%, transparent 65%);
+        background: radial-gradient(ellipse at 70% 50%, rgba(46,163,208,.22) 0%, transparent 65%);
     }
     .al-hero__inner {
         max-width: 1200px;
@@ -282,8 +289,8 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     }
     .al-hero__badge {
         display: inline-block;
-        background: rgba(230,146,10,.15);
-        border: 1px solid var(--al-orange);
+        background: rgba(46,163,208,.18);
+        border: 1px solid var(--al-orange-lt);
         color: var(--al-orange-lt);
         font-size: .85rem;
         font-weight: 700;
@@ -295,7 +302,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     .al-hero__title {
         font-size: clamp(2rem, 4vw, 3rem);
         font-weight: 900;
-        color: var(--al-orange-lt);
+        color: #ffffff;
         line-height: 1.2;
         margin-bottom: 18px;
         text-transform: uppercase;
@@ -303,7 +310,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         text-shadow: 0 2px 12px rgba(0,0,0,.4);
     }
     .al-hero__desc {
-        color: #d4c4aa;
+        color: #c8e4f5;
         font-size: 1rem;
         line-height: 1.7;
         margin-bottom: 28px;
@@ -319,7 +326,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     .al-hero__img img {
         max-height: 420px;
         object-fit: contain;
-        filter: drop-shadow(0 8px 32px rgba(230,146,10,.3));
+        filter: drop-shadow(0 8px 32px rgba(15,125,186,.4));
     }
 
     /* ── FEATURE / VIDEO ─────────────────────────────────────────── */
@@ -340,15 +347,15 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         gap: 40px;
         align-items: center;
     }
-    /* Yellow-bordered video container matching mockup */
+    /* Blue-bordered video container */
     .al-feature__media {
         position: relative;
-        border: 3px solid #f5c518;
+        border: 3px solid var(--color-primary-light);
         border-radius: 14px;
         overflow: hidden;
         background: #000;
         aspect-ratio: 16/9;
-        box-shadow: 0 0 28px rgba(245, 197, 24, 0.35);
+        box-shadow: 0 0 28px rgba(15,125,186,0.4);
     }
     .al-feature__media iframe {
         width: 100%;
@@ -361,7 +368,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
 
     /* ── BENEFITS ────────────────────────────────────────────────── */
     .al-benefits {
-        background: #fafafa;
+        background: var(--color-bg-light);
         padding: 70px 0;
     }
     .al-section-inner {
@@ -374,7 +381,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         margin-bottom: 48px;
     }
     .al-section-pretitle {
-        color: var(--al-orange);
+        color: var(--color-primary);
         font-size: .85rem;
         font-weight: 700;
         letter-spacing: 2px;
@@ -389,13 +396,13 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         font-weight: bold;
         text-align: center;
         line-height: 1.2;
-        background: rgba(77, 44, 25, 1.0);
-        background: -webkit-linear-gradient(183deg, rgba(77, 44, 25, 1.0), rgba(148, 65, 13, 1.0));
-        background: linear-gradient(183deg, rgba(77, 44, 25, 1.0), rgba(148, 65, 13, 1.0));
+        background: var(--color-primary-dark);
+        background: -webkit-linear-gradient(183deg, var(--color-primary-dark), var(--color-primary));
+        background: linear-gradient(183deg, var(--color-primary-dark), var(--color-primary));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        color: rgb(77, 44, 25);
+        color: var(--color-primary-dark);
         margin-bottom: 14px;
         display: block;
     }
@@ -421,7 +428,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     /* ── BENEFIT CARD ────────────────────────────────────────────── */
     .al-benefit-card {
         background: #ffffff;
-        border: 1px solid #e0d4c4;
+        border: 1px solid #c8dff0;
         border-radius: var(--al-radius);
         overflow: hidden;
         display: flex;
@@ -449,7 +456,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         right: 6px;
         font-size: 110px;
         font-weight: 900;
-        color: rgba(121, 72, 40, 0.07);
+        color: rgba(15, 125, 186, 0.07);
         line-height: 1;
         pointer-events: none;
         user-select: none;
@@ -461,7 +468,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     /* Title */
     .al-benefit-card__title {
         font-family: sans-serif;
-        color: rgb(77, 44, 25);
+        color: var(--color-primary-dark);
         font-size: 17px;
         font-weight: bold;
         text-transform: uppercase;
@@ -470,7 +477,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         margin-bottom: 14px;
         position: relative;
         z-index: 1;
-        -webkit-text-fill-color: rgb(77, 44, 25);
+        -webkit-text-fill-color: var(--color-primary-dark);
     }
 
     /* Description */
@@ -485,9 +492,9 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         -webkit-text-fill-color: rgb(0, 0, 0);
     }
 
-    /* Bottom brown strip */
+    /* Bottom blue strip */
     .al-benefit-card__bottom {
-        background-color: rgb(121, 72, 40);
+        background-color: var(--color-primary);
         text-align: center;
         padding: 0 16px 20px;
         position: relative;
@@ -500,7 +507,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         height: 74px;
         border-radius: 50%;
         background: #ffffff;
-        border: 3px solid rgb(121, 72, 40);
+        border: 3px solid var(--color-primary);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -557,25 +564,25 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     }
     .al-plan {
         background: var(--al-card-bg);
-        border: 2px solid #e0d0b8;
+        border: 2px solid #c8dff0;
         border-radius: var(--al-radius);
         overflow: hidden;
         transition: transform .25s, box-shadow .25s;
     }
     .al-plan:hover { transform: translateY(-6px); box-shadow: var(--al-shadow); }
     .al-plan--featured {
-        border-color: var(--al-orange);
+        border-color: var(--color-primary);
         transform: scale(1.04);
-        box-shadow: 0 8px 32px rgba(230,146,10,.25);
+        box-shadow: 0 8px 32px rgba(15,125,186,.28);
     }
     .al-plan--featured:hover { transform: scale(1.04) translateY(-4px); }
     .al-plan__header {
-        background: var(--al-dark);
+        background: var(--color-primary-dark);
         color: var(--al-white);
         padding: 20px 22px;
         text-align: center;
     }
-    .al-plan--featured .al-plan__header { background: var(--al-orange); }
+    .al-plan--featured .al-plan__header { background: var(--color-primary); }
     .al-plan__label {
         font-size: .78rem;
         font-weight: 600;
@@ -605,7 +612,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     }
     .al-plan__features li::before {
         content: '✔';
-        color: var(--al-orange);
+        color: var(--color-primary);
         font-weight: 700;
         flex-shrink: 0;
         margin-top: 1px;
@@ -620,7 +627,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     .al-plan__price-sale {
         font-size: 1.4rem;
         font-weight: 800;
-        color: var(--al-orange);
+        color: var(--color-primary);
     }
     .al-plan__cta {
         display: block;
@@ -638,7 +645,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
 
     /* ── ADVANTAGES + FORM ───────────────────────────────────────── */
     .al-adv {
-        background: linear-gradient(135deg, #1a0900 0%, #2d1400 100%);
+        background: linear-gradient(135deg, #0A4F8A 0%, #083d6e 100%);
         padding: 70px 0;
     }
     .al-adv__inner {
@@ -662,7 +669,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     }
     .al-adv__list { list-style: none; margin-bottom: 30px; }
     .al-adv__list li {
-        color: #d4c4aa;
+        color: #c8e4f5;
         font-size: .92rem;
         line-height: 1.6;
         padding: 8px 0;
@@ -673,7 +680,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     }
     .al-adv__list li::before {
         content: '✔';
-        color: var(--al-orange-lt);
+        color: var(--color-primary-light);
         font-weight: 700;
         flex-shrink: 0;
     }
@@ -681,16 +688,16 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         max-height: 280px;
         object-fit: contain;
         margin: 0 auto;
-        filter: drop-shadow(0 6px 20px rgba(230,146,10,.25));
+        filter: drop-shadow(0 6px 20px rgba(15,125,186,.3));
     }
     .al-adv__right { }
     /* ── FORM BOX ────────────────────────────────────────────────── */
     .al-form-box {
-        background: linear-gradient(160deg, #2a1000 0%, #3d1a00 50%, #4d2c19 100%);
+        background: linear-gradient(160deg, #062d55 0%, #0a3f75 50%, #0d5494 100%);
         border-radius: var(--al-radius);
         padding: 36px 32px;
         box-shadow: 0 8px 40px rgba(0,0,0,.5);
-        border: 1px solid rgba(148,65,13,.4);
+        border: 1px solid rgba(15,125,186,.4);
     }
     .al-form-box__title {
         font-size: 2rem;
@@ -699,13 +706,13 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         margin-bottom: 6px;
         text-transform: uppercase;
         line-height: 1.2;
-        background: rgba(77, 44, 25, 1.0);
-        background: -webkit-linear-gradient(183deg, rgba(255,179,55,1.0), rgba(239,80,1,1.0));
-        background: linear-gradient(183deg, rgba(255,179,55,1.0), rgba(239,80,1,1.0));
+        background: var(--color-primary-light);
+        background: -webkit-linear-gradient(183deg, #ffffff, var(--color-primary-light));
+        background: linear-gradient(183deg, #ffffff, var(--color-primary-light));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        color: rgba(255,179,55,1.0);
+        color: #ffffff;
         display: block;
     }
     .al-form-box__subtitle {
@@ -758,8 +765,8 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     .al-form-box .wpcf7-form textarea:focus,
     .al-form-box .al-form-field:focus {
         outline: none;
-        border-color: var(--al-orange-lt);
-        box-shadow: 0 0 0 3px rgba(255,179,55,.15);
+        border-color: var(--color-primary-light);
+        box-shadow: 0 0 0 3px rgba(46,163,208,.2);
         background: rgba(255,255,255,.11);
     }
     .al-form-box .wpcf7-form input[type="submit"],
@@ -791,12 +798,12 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         -webkit-text-fill-color: rgb(228, 228, 228);
     }
     .al-form-box__hotline a {
-        color: var(--al-orange-lt);
+        color: var(--color-accent-red);
         font-weight: 800;
         font-size: 1.3rem;
         display: block;
         margin-top: 4px;
-        -webkit-text-fill-color: var(--al-orange-lt);
+        -webkit-text-fill-color: var(--color-accent-red);
     }
 
     /* ── FOOTER ──────────────────────────────────────────────────── */
@@ -827,7 +834,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         margin: 0;
     }
     .al-footer__info a { color: #bbb; transition: color .2s; }
-    .al-footer__info a:hover { color: var(--al-orange-lt); }
+    .al-footer__info a:hover { color: var(--color-primary-light); }
     .al-footer__links-title {
         color: var(--al-white);
         font-size: .92rem;
@@ -843,7 +850,7 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         font-size: .84rem;
         transition: color .2s;
     }
-    .al-footer__links-list a:hover { color: var(--al-orange-lt); }
+    .al-footer__links-list a:hover { color: var(--color-primary-light); }
     .al-footer__bottom {
         border-top: 1px solid #2a2a2a;
         margin-top: 30px;
@@ -868,11 +875,11 @@ $footer_logo = $al_footer_logo ?: $al_logo;
     .al-nav__drawer-links a {
         display: block;
         padding: 14px 20px;
-        color: #e0cdb0;
+        color: #cce3f5;
         font-size: .95rem;
         font-weight: 500;
     }
-    .al-nav__drawer-links a:hover { color: var(--al-orange-lt); background: rgba(255,255,255,.04); }
+    .al-nav__drawer-links a:hover { color: var(--color-primary-light); background: rgba(255,255,255,.04); }
     .al-nav__drawer-cta { padding: 16px 20px; }
 
     /* ── RESPONSIVE ──────────────────────────────────────────────── */
