@@ -133,6 +133,9 @@ $footer_logo = $al_footer_logo ?: $al_logo;
         text-align: justify;
         line-height: 1.6;
     }
+    .al-plan__body .al-plan__features li, .al-plan__pricing .al-plan__price-sale{
+        color: #000;
+    }
 
     /* ── NAV ─────────────────────────────────────────────────────── */
     .al-nav {
