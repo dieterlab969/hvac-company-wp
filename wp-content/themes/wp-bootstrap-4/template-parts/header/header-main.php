@@ -92,7 +92,16 @@
 <div class="d-none d-lg-block d-xl-block">
     <section class="header__main">
         <div class="mobile-hidden">
-            <img alt="header banner" class="header-banner" src="https://dienlanhphangia.com/wp-content/uploads/2024/03/header-banner.png"/>
+            <?php
+            $default_banner = 'https://dienlanhphangia.com/wp-content/uploads/2024/03/header-banner.png';
+            $header_banner  = get_theme_mod( 'header_banner_image', $default_banner );
+            if ( empty( $header_banner ) ) {
+                $header_banner = $default_banner;
+            }
+            ?>
+            <img alt="<?php esc_attr_e( 'header banner', 'wp-bootstrap-4' ); ?>"
+                 class="header-banner"
+                 src="<?php echo esc_url( $header_banner ); ?>"/>
         </div>
         <div class="container desktop-hidden">
             <?php
@@ -149,5 +158,5 @@
         <!-- =============== END  ====================== -->
 <!-- end header main -->
 <div class="header__menu d-none d-lg-block d-xl-block"> 
-	<?php wp_nav_menu( array( 'theme_location' => 'menu-1') ); ?>
+        <?php wp_nav_menu( array( 'theme_location' => 'menu-1') ); ?>
 </div>
