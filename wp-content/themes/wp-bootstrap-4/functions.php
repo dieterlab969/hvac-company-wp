@@ -587,3 +587,10 @@ add_action( 'acf/init', function () {
         require_once $file;
     }
 } );
+
+function enqueue_ads_landing_styles() {
+    if ( is_page_template( 'page-templates/ads-landing-template.php' ) ) {
+        wp_enqueue_style( 'ads-landing-style', get_template_directory_uri() . '/assets/css/ads-landing.css', array(), '1.0' );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_ads_landing_styles' );
