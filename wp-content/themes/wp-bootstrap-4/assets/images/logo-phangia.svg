@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <linearGradient id="pglg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00a0e4"/>
+      <stop offset="100%" stop-color="#007aaf"/>
+    </linearGradient>
+  </defs>
+  <rect width="80" height="80" rx="14" fill="url(#pglg)"/>
+  <!-- Snowflake -->
+  <g stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none">
+    <line x1="40" y1="16" x2="40" y2="64"/>
+    <line x1="20" y1="28" x2="60" y2="52"/>
+    <line x1="20" y1="52" x2="60" y2="28"/>
+  </g>
+  <g stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none">
+    <path d="M36 22 L40 18 L44 22"/>
+    <path d="M36 58 L40 62 L44 58"/>
+    <path d="M22 32 L26 30 L26 36"/>
+    <path d="M22 48 L26 50 L26 44"/>
+    <path d="M58 32 L54 30 L54 36"/>
+    <path d="M58 48 L54 50 L54 44"/>
+  </g>
+  <circle cx="40" cy="40" r="6" fill="#ffffff"/>
+  <text x="40" y="76" font-family="Manrope,Arial" font-size="9" font-weight="800" fill="#003e6b" text-anchor="middle" opacity="0">PG</text>
+</svg>

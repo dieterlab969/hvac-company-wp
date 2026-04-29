@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="p2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fde9c8"/>
+      <stop offset="100%" stop-color="#ffd7d7"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#p2)"/>
+  <!-- Sun -->
+  <circle cx="80" cy="80" r="40" fill="#ffd76a" opacity=".9"/>
+  <!-- School building (3 colored blocks) -->
+  <rect x="60" y="170" width="160" height="220" fill="#ff7a1a"/>
+  <rect x="220" y="130" width="160" height="260" fill="#ffd76a"/>
+  <rect x="380" y="200" width="160" height="190" fill="#34c0a0"/>
+  <!-- Roofs -->
+  <polygon points="60,170 140,120 220,170" fill="#a23b00"/>
+  <polygon points="220,130 300,80 380,130" fill="#a23b00"/>
+  <polygon points="380,200 460,150 540,200" fill="#a23b00"/>
+  <!-- Windows -->
+  <g fill="#fff" opacity=".95">
+    <rect x="80" y="200" width="40" height="40"/>
+    <rect x="160" y="200" width="40" height="40"/>
+    <rect x="80" y="260" width="40" height="40"/>
+    <rect x="160" y="260" width="40" height="40"/>
+    <rect x="240" y="170" width="40" height="40"/>
+    <rect x="320" y="170" width="40" height="40"/>
+    <rect x="240" y="240" width="40" height="40"/>
+    <rect x="320" y="240" width="40" height="40"/>
+    <rect x="400" y="230" width="40" height="40"/>
+    <rect x="480" y="230" width="40" height="40"/>
+  </g>
+  <!-- Doors -->
+  <rect x="120" y="340" width="40" height="50" fill="#7a3d00"/>
+  <rect x="280" y="320" width="40" height="70" fill="#7a3d00"/>
+  <rect x="440" y="340" width="40" height="50" fill="#7a3d00"/>
+  <!-- Ground -->
+  <rect x="0" y="390" width="600" height="60" fill="#86b96a"/>
+  <!-- Balloons -->
+  <g>
+    <line x1="500" y1="60" x2="500" y2="120" stroke="#444" stroke-width="1"/>
+    <ellipse cx="500" cy="50" rx="14" ry="18" fill="#e60012"/>
+    <line x1="540" y1="80" x2="540" y2="140" stroke="#444" stroke-width="1"/>
+    <ellipse cx="540" cy="70" rx="14" ry="18" fill="#0046aa"/>
+  </g>
+</svg>

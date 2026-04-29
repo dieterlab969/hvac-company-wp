@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8f1ff"/>
+      <stop offset="100%" stop-color="#cfe1ff"/>
+    </linearGradient>
+    <linearGradient id="acg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#dbe7f5"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg1)"/>
+  <!-- desk surface -->
+  <rect x="0" y="380" width="800" height="120" fill="#b6c8de"/>
+  <!-- person silhouette -->
+  <circle cx="220" cy="240" r="46" fill="#2a3d5a"/>
+  <path d="M120 400c0-55 45-100 100-100s100 45 100 100z" fill="#2a3d5a"/>
+  <!-- laptop -->
+  <rect x="350" y="280" width="220" height="130" rx="10" fill="#0046aa"/>
+  <rect x="365" y="295" width="190" height="100" rx="4" fill="#fff"/>
+  <rect x="380" y="312" width="60" height="8" rx="2" fill="#0046aa"/>
+  <rect x="380" y="328" width="120" height="6" rx="2" fill="#cfe1ff"/>
+  <rect x="380" y="342" width="100" height="6" rx="2" fill="#cfe1ff"/>
+  <rect x="380" y="356" width="140" height="6" rx="2" fill="#cfe1ff"/>
+  <rect x="340" y="408" width="240" height="10" rx="3" fill="#082b66"/>
+  <!-- AC unit on wall -->
+  <rect x="600" y="60" width="160" height="60" rx="12" fill="url(#acg)" stroke="#a9bedd"/>
+  <line x1="610" y1="80" x2="750" y2="80" stroke="#a9bedd" stroke-width="2"/>
+  <line x1="610" y1="92" x2="750" y2="92" stroke="#a9bedd" stroke-width="2"/>
+  <line x1="610" y1="104" x2="750" y2="104" stroke="#a9bedd" stroke-width="2"/>
+  <!-- airflow -->
+  <path d="M620 130 q-10 30 -30 50 M660 135 q-10 35 -30 55 M700 130 q-10 35 -30 55" stroke="#0046aa" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55"/>
+  <!-- clipboard -->
+  <rect x="80" y="120" width="120" height="160" rx="8" fill="#fff" stroke="#a9bedd"/>
+  <rect x="110" y="110" width="60" height="20" rx="4" fill="#0046aa"/>
+  <rect x="100" y="150" width="80" height="6" rx="2" fill="#cfe1ff"/>
+  <rect x="100" y="170" width="60" height="6" rx="2" fill="#cfe1ff"/>
+  <rect x="100" y="190" width="80" height="6" rx="2" fill="#cfe1ff"/>
+  <rect x="100" y="210" width="50" height="6" rx="2" fill="#cfe1ff"/>
+</svg>
