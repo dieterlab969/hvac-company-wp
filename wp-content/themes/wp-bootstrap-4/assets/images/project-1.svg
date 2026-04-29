@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="p1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cfe1ff"/>
+      <stop offset="100%" stop-color="#eaf1fa"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#p1)"/>
+  <!-- Wall -->
+  <rect x="0" y="280" width="600" height="170" fill="#dee9f7"/>
+  <!-- Sofa -->
+  <rect x="120" y="320" width="280" height="80" rx="16" fill="#748aa8"/>
+  <rect x="100" y="350" width="60" height="50" rx="10" fill="#5d7392"/>
+  <rect x="360" y="350" width="60" height="50" rx="10" fill="#5d7392"/>
+  <!-- Picture frame -->
+  <rect x="360" y="80" width="160" height="120" rx="6" fill="#fff" stroke="#a9bedd"/>
+  <rect x="375" y="95" width="130" height="90" fill="#cfe1ff"/>
+  <!-- AC unit -->
+  <rect x="80" y="80" width="220" height="70" rx="14" fill="#fff" stroke="#a9bedd" stroke-width="2"/>
+  <line x1="100" y1="105" x2="280" y2="105" stroke="#a9bedd" stroke-width="2"/>
+  <line x1="100" y1="118" x2="280" y2="118" stroke="#a9bedd" stroke-width="2"/>
+  <line x1="100" y1="131" x2="280" y2="131" stroke="#a9bedd" stroke-width="2"/>
+  <circle cx="270" cy="95" r="3" fill="#0046aa"/>
+  <!-- Airflow -->
+  <path d="M120 160 q-10 30 -25 50 M170 165 q-10 35 -25 55 M220 160 q-10 35 -25 55" stroke="#0046aa" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55"/>
+</svg>

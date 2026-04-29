@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dce9fb"/>
+      <stop offset="100%" stop-color="#f4f7fb"/>
+    </linearGradient>
+    <linearGradient id="bldg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#cfdcef"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg2)"/>
+  <!-- Sun -->
+  <circle cx="650" cy="110" r="55" fill="#ffd76a" opacity=".8"/>
+  <!-- Building -->
+  <rect x="120" y="140" width="280" height="280" fill="url(#bldg)" stroke="#9fb5d2"/>
+  <g fill="#9fb5d2">
+    <rect x="140" y="160" width="40" height="40"/>
+    <rect x="200" y="160" width="40" height="40"/>
+    <rect x="260" y="160" width="40" height="40"/>
+    <rect x="320" y="160" width="40" height="40"/>
+    <rect x="140" y="220" width="40" height="40"/>
+    <rect x="200" y="220" width="40" height="40"/>
+    <rect x="260" y="220" width="40" height="40"/>
+    <rect x="320" y="220" width="40" height="40"/>
+    <rect x="140" y="280" width="40" height="40"/>
+    <rect x="200" y="280" width="40" height="40"/>
+    <rect x="260" y="280" width="40" height="40"/>
+    <rect x="320" y="280" width="40" height="40"/>
+  </g>
+  <!-- Outdoor units -->
+  <rect x="430" y="320" width="100" height="64" rx="6" fill="#fff" stroke="#9fb5d2"/>
+  <circle cx="460" cy="352" r="14" fill="#dde7f5" stroke="#9fb5d2"/>
+  <circle cx="500" cy="352" r="14" fill="#dde7f5" stroke="#9fb5d2"/>
+  <rect x="550" y="320" width="100" height="64" rx="6" fill="#fff" stroke="#9fb5d2"/>
+  <circle cx="580" cy="352" r="14" fill="#dde7f5" stroke="#9fb5d2"/>
+  <circle cx="620" cy="352" r="14" fill="#dde7f5" stroke="#9fb5d2"/>
+  <!-- Worker with helmet -->
+  <circle cx="510" cy="240" r="22" fill="#0046aa"/>
+  <rect x="488" y="220" width="44" height="14" rx="6" fill="#e60012"/>
+  <path d="M470 320c0-22 18-40 40-40s40 18 40 40z" fill="#0046aa"/>
+  <!-- Ground -->
+  <rect x="0" y="384" width="800" height="116" fill="#b6c8de"/>
+  <!-- Pipes -->
+  <path d="M400 280 q40 20 40 40" stroke="#a9bedd" stroke-width="6" fill="none"/>
+  <!-- Airflow lines -->
+  <path d="M480 380 q-20 30 -50 40 M540 380 q-20 30 -50 40 M600 380 q-20 30 -50 40" stroke="#0046aa" stroke-width="3" fill="none" stroke-linecap="round" opacity=".5"/>
+</svg>

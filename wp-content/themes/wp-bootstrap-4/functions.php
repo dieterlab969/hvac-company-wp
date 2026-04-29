@@ -588,9 +588,29 @@ add_action( 'acf/init', function () {
     }
 } );
 
-function enqueue_ads_landing_styles() {
-    if ( is_page_template( 'page-templates/ads-landing-template.php' ) ) {
-        wp_enqueue_style( 'ads-landing-style', get_template_directory_uri() . '/assets/css/ads-landing.css', array(), '1.0' );
-    }
-}
-add_action( 'wp_enqueue_scripts', 'enqueue_ads_landing_styles' );
+/**
+ * Enqueue the landing-page assets through wp_head() / wp_footer().
+ * Registered before get_header() so wp_enqueue_scripts (fired during wp_head)
+ * still picks them up.
+ */
+add_action( 'wp_enqueue_scripts', function () {
+    $base = get_template_directory_uri();
+    $ver  = '1.0.0';
+
+    // Google Fonts (Inter + Manrope)
+    wp_enqueue_style(
+        'phangia-fonts',
+        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap',
+        array(),
+        null
+    );
+
+    // Landing page stylesheet
+    wp_enqueue_style(
+        'phangia-landing',
+        $base . '/assets/css/styles.css',
+        array( 'phangia-fonts' ),
+        $ver
+    );
+
+}, 20 );
